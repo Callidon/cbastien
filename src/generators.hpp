@@ -1,24 +1,46 @@
 #include "structures.hpp"
 
-/*
- * Génère un noeud de type Atom
- */
-Atom* GenAtom(int code, int action, ATOMTYPE type) {
-	Atom * patom = new Atom;
-	patom->code = code;
-	patom->action = action;
-	patom->AType = type;
-	return patom;
-}
+ #ifndef GENERATORS_HPP
+ #define GENERATORS_HPP
 
 /*
  * Génère un noeud de type Conc
  */
-Conc* GenConc(Node* pa, Node* pb) {
-	Conc * pconc = new Conc;
-	pconc->left = pa;
-	pconc->right = pb;
-	return pconc;
-}
+Conc* GenConc(Node* pleft, Node* pright);
 
-// TODO faire la Memory Pool
+/*
+ * Génère un noeud de type Union
+ */
+Union* GenUnion(Node* pleft, Node* pright);
+
+/*
+ * Génère un noeud de type Star
+ */
+Star * GenStar(Node* ptr);
+
+/*
+ * Génère un noeud de type UN
+ */
+Un * GenUN(Node* ptr);
+
+/*
+ * Génère un noeud de type Atom
+ */
+Atom* GenAtom(int code, int action, ATOMTYPE type);
+
+/*
+ * Génère le tableau contenant la grammaire des grammaires
+ */
+Go* GenForest();
+
+/*
+ * Affiche dans la sortie standard l'arbre à partir d'un noeud
+ */
+void printNode(Node* node);
+
+/*
+ * Affiche dans la sortie les arbres de la grammaire des grammaires
+ */
+void printForest(Go* forest);
+
+#endif

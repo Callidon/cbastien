@@ -1,3 +1,6 @@
+#ifndef STRUCTURES_HPP
+#define STRUCTURES_HPP
+
 // Type d'une feuille
 enum ATOMTYPE {
 	Terminal,
@@ -5,13 +8,13 @@ enum ATOMTYPE {
 };
 
 // Type d'une opération/noeud
-/*enum Operation {
-	Conc,
-	Union,
-	Star,
+enum Operation {
+	CONC,
+	UNION,
+	STAR,
 	UN,
-	Atom
-};*/
+	ATOM
+};
 
 // Noeud d'un arbre
 typedef struct _Node { } Node;
@@ -37,10 +40,10 @@ typedef struct _Star : public Node {
 } Star;
 
 // Noeud représentant une opération (/x/)
-typedef struct _UN : public Node {
-	Node * UN_e;
-	~_UN() { delete UN_e; }
-} UN;
+typedef struct _Un : public Node {
+	Node * Un_e;
+	~_Un() { delete Un_e; }
+} Un;
 
 // Noeud représentant un terminal ou non-terminal
 typedef struct _Atom : public Node {
@@ -52,3 +55,5 @@ typedef struct _Atom : public Node {
 
 // Tableau de la grammaire des grammaires
 typedef Node* Go;
+
+#endif
