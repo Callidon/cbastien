@@ -3,11 +3,9 @@
 using namespace std;
 
 int main() {
-	Atom* a = GenAtom(1,0,Terminal);
-	Atom* b = GenAtom(2,0,Terminal);
-	cout << a->code << endl;
+	Go* go = GenForest();
+	printForest(go);
 
-	delete a;
-	delete b;
+	delete go;
 	return 1;
 }

@@ -36,7 +36,7 @@ Go* GenForest();
 /*
  * Affiche dans la sortie standard l'arbre à partir d'un noeud
  */
-void printNode(Node* node);
+void printNode(Node* node, int prof);
 
 /*
  * Affiche dans la sortie les arbres de la grammaire des grammaires

@@ -17,7 +17,9 @@ enum Operation {
 };
 
 // Noeud d'un arbre
-typedef struct _Node { } Node;
+typedef struct _Node {
+	Operation classname;
+} Node;
 
 // Noeud représentant une concaténation
 typedef struct _Conc : public Node {
