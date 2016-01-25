@@ -1,6 +1,8 @@
 #include "structures.hpp"
 #include <iostream>
 
+using namespace std;
+
 /*
  * Génère un noeud de type Conc
  */
@@ -120,29 +122,29 @@ void printNode(Node* node, int prof) {
 	int ind = 0;
 	int current_prof = prof + 1;
 	for(ind = 0; ind < current_prof; ind++) {
-		std::cout << "---";
+		cout << "---";
 	}
 	if(node->classname == CONC) {
 		Conc * conc = static_cast<Conc*>(node);
-		std::cout << ">conc " << std::endl;
+		cout << ">conc " << endl;
 		printNode(conc->left, current_prof);
 		printNode(conc->right, current_prof);
 	} else if(node->classname == UNION) {
 		Union * punion = static_cast<Union*>(node);
-		std::cout << ">union " << std::endl;
+		cout << ">union " << endl;
 		printNode(punion->left, current_prof);
 		printNode(punion->right, current_prof);
 	} else if(node->classname == STAR) {
 		Star * star = static_cast<Star*>(node);
-		std::cout << ">star " << std::endl;
+		cout << ">star " << endl;
 		printNode(star->Star_e, current_prof);
 	} else if(node->classname == UN) {
 		Un * un = static_cast<Un*>(node);
-		std::cout << ">UN " << std::endl;
+		cout << ">UN " << endl;
 		printNode(un->Un_e, current_prof);
 	} else if(node->classname == ATOM) {
 		Atom * atom = static_cast<Atom*>(node);
-		std::cout << "> " << static_cast<char>(atom->code) << std::endl; ;
+		cout << "> " << static_cast<char>(atom->code) << endl; ;
 	}
 }
 
@@ -150,14 +152,14 @@ void printNode(Node* node, int prof) {
  * Affiche dans la sortie les arbres de la grammaire des grammaires
  */
 void printForest(Go* forest) {
-	std::cout << "Règle S" << std::endl;
+	cout << "Règle S" << endl;
 	printNode(forest[0], 0);
-	std::cout << "Règle N" << std::endl;
+	cout << "Règle N" << endl;
 	printNode(forest[1], 0);
-	std::cout << "Règle E" << std::endl;
+	cout << "Règle E" << endl;
 	printNode(forest[2], 0);
-	std::cout << "Règle T" << std::endl;
+	cout << "Règle T" << endl;
 	printNode(forest[3], 0);
-	std::cout << "Règle F" << std::endl;
+	cout << "Règle F" << endl;
 	printNode(forest[4], 0);
 }
