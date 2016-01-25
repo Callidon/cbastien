@@ -1,4 +1,4 @@
-#include "src/generators.hpp"
+#include "generators.hpp"
 #include "iostream"
 using namespace std;
 
