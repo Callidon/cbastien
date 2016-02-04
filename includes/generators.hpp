@@ -1,7 +1,7 @@
-#include "structures.hpp"
+#ifndef GENERATORS_HPP
+#define GENERATORS_HPP
 
- #ifndef GENERATORS_HPP
- #define GENERATORS_HPP
+#include "structures.hpp"
 
 /*
  * Génère un noeud de type Conc
