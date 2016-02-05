@@ -1,5 +1,5 @@
-#include "structures.hpp"
 #include <iostream>
+#include "generators.hpp"
 
 using namespace std;
 
@@ -118,7 +118,7 @@ Go* GenForest() {
 /*
  * Affiche dans la sortie standard l'arbre à partir d'un noeud
  */
-void printNode(Node* node, int prof) {
+void printNode(Node* node, int prof, table_symboles_t & table_symboles) {
 	int ind = 0;
 	int current_prof = prof + 1;
 	for(ind = 0; ind < current_prof; ind++) {
@@ -127,39 +127,39 @@ void printNode(Node* node, int prof) {
 	if(node->classname == CONC) {
 		Conc * conc = static_cast<Conc*>(node);
 		cout << ">conc " << endl;
-		printNode(conc->left, current_prof);
-		printNode(conc->right, current_prof);
+		printNode(conc->left, current_prof, table_symboles);
+		printNode(conc->right, current_prof, table_symboles);
 	} else if(node->classname == UNION) {
 		Union * punion = static_cast<Union*>(node);
 		cout << ">union " << endl;
-		printNode(punion->left, current_prof);
-		printNode(punion->right, current_prof);
+		printNode(punion->left, current_prof, table_symboles);
+		printNode(punion->right, current_prof, table_symboles);
 	} else if(node->classname == STAR) {
 		Star * star = static_cast<Star*>(node);
 		cout << ">star " << endl;
-		printNode(star->Star_e, current_prof);
+		printNode(star->Star_e, current_prof, table_symboles);
 	} else if(node->classname == UN) {
 		Un * un = static_cast<Un*>(node);
 		cout << ">UN " << endl;
-		printNode(un->Un_e, current_prof);
+		printNode(un->Un_e, current_prof, table_symboles);
 	} else if(node->classname == ATOM) {
 		Atom * atom = static_cast<Atom*>(node);
-		cout << "> " << static_cast<char>(atom->code) << endl; ;
+		cout << "> " << table_symboles[atom->code] << endl; ;
 	}
 }
 
 /*
  * Affiche dans la sortie les arbres de la grammaire des grammaires
  */
-void printForest(Go* forest) {
+void printForest(Go* forest, table_symboles_t & table_symboles) {
 	cout << "Règle S" << endl;
-	printNode(forest[0], 0);
+	printNode(forest[0], 0, table_symboles);
 	cout << "Règle N" << endl;
-	printNode(forest[1], 0);
+	printNode(forest[1], 0, table_symboles);
 	cout << "Règle E" << endl;
-	printNode(forest[2], 0);
+	printNode(forest[2], 0, table_symboles);
 	cout << "Règle T" << endl;
-	printNode(forest[3], 0);
+	printNode(forest[3], 0, table_symboles);
 	cout << "Règle F" << endl;
-	printNode(forest[4], 0);
+	printNode(forest[4], 0, table_symboles);
 }

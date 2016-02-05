@@ -2,6 +2,7 @@
 #define GENERATORS_HPP
 
 #include "structures.hpp"
+#include "table_symboles.hpp"
 
 /*
  * Génère un noeud de type Conc
@@ -36,11 +37,11 @@ Go* GenForest();
 /*
  * Affiche dans la sortie standard l'arbre à partir d'un noeud
  */
-void printNode(Node* node, int prof);
+void printNode(Node* node, int prof, table_symboles_t & table_symboles);
 
 /*
  * Affiche dans la sortie les arbres de la grammaire des grammaires
  */
-void printForest(Go* forest);
+void printForest(Go* forest, table_symboles_t & table_symboles);
 
 #endif
