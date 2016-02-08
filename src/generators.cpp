@@ -63,52 +63,51 @@ Atom* GenAtom(int code, int action, ATOMTYPE type) {
 Go* GenForest() {
 	// 0 = IDNTER, 1 = ELTER, 2 = (/, 3 = /)
 	Go * go = new Go[5];
-	// règle S TODO : mettre bon code ascii pour ->
 	go[0] = GenConc(
 				GenStar(
 					GenConc(
 						GenConc(
 							GenConc(
-								GenAtom(static_cast<int>('N'), 0, NonTerminal), GenAtom(62, 0, Terminal)
+								GenAtom(1, 0, NonTerminal), GenAtom(6, 0, Terminal)
 							),
-							GenAtom(static_cast<int>('E'), 0 , NonTerminal)
+							GenAtom(2, 0 , NonTerminal)
 						),
-						GenAtom(static_cast<int>(','), 0, Terminal)
+						GenAtom(9, 0, Terminal)
 					)
 				),
-				GenAtom(static_cast<int>(';'), 0, Terminal)
+				GenAtom(5, 0, Terminal)
 			);
 	// règle N TODO : mettre bon code ascii
-	go[1] = GenAtom(0, 0, NonTerminal);
+	go[1] = GenAtom(16, 0, NonTerminal);
 	// règle E
-	go[2] = GenConc(GenAtom(static_cast<int>('T'), 0 , NonTerminal), GenStar(GenConc(GenAtom(static_cast<int>('+'), 0, Terminal), GenAtom(static_cast<int>('T'), 0, NonTerminal))));
+	go[2] = GenConc(GenAtom(3, 0 , NonTerminal), GenStar(GenConc(GenAtom(7, 0, Terminal), GenAtom(3, 0, NonTerminal))));
 	// règle T
-	go[3] = GenConc(GenAtom(static_cast<int>('F'), 0 , NonTerminal), GenStar(GenConc(GenAtom(static_cast<int>('.'), 0, Terminal), GenAtom(static_cast<int>('F'), 0, NonTerminal))));
+	go[3] = GenConc(GenAtom(4, 0 , NonTerminal), GenStar(GenConc(GenAtom(8, 0, Terminal), GenAtom(4, 0, NonTerminal))));
 	// règle F TODO : mettre bon code ascii
 	go[4] = GenUnion(
 				GenUnion(
 					GenUnion(
 						GenUnion(
-							GenAtom(0, 0, NonTerminal), GenAtom(1, 0, Terminal)
+							GenAtom(16, 0, NonTerminal), GenAtom(17, 0, Terminal)
 						),
 							GenConc(
-								GenAtom(static_cast<int>('('), 0, Terminal),
+								GenAtom(10, 0, Terminal),
 								GenConc(
-									GenAtom(static_cast<int>('E'), 0, NonTerminal), GenAtom(static_cast<int>(')'), 0, Terminal)
+									GenAtom(2, 0, NonTerminal), GenAtom(11, 0, Terminal)
 								)
 							)
 						),
 						GenConc(
-							GenAtom(static_cast<int>('['), 0, Terminal),
+							GenAtom(12, 0, Terminal),
 							GenConc(
-								GenAtom(static_cast<int>('E'), 0, NonTerminal), GenAtom(static_cast<int>(']'), 0, Terminal)
+								GenAtom(2, 0, NonTerminal), GenAtom(13, 0, Terminal)
 							)
 						)
 					),
 					GenConc(
-						GenAtom(static_cast<int>('{'), 0 , Terminal),
+						GenAtom(14, 0 , Terminal),
 						GenConc(
-							GenAtom(static_cast<int>('E'), 0, NonTerminal), GenAtom(static_cast<int>('}'), 0, Terminal)
+							GenAtom(2, 0, NonTerminal), GenAtom(15, 0, Terminal)
 						)
 					)
 				);
@@ -126,25 +125,25 @@ void printNode(Node* node, int prof, table_symboles_t & table_symboles) {
 	}
 	if(node->classname == CONC) {
 		Conc * conc = static_cast<Conc*>(node);
-		cout << ">conc " << endl;
+		cout << "> Conc " << endl;
 		printNode(conc->left, current_prof, table_symboles);
 		printNode(conc->right, current_prof, table_symboles);
 	} else if(node->classname == UNION) {
 		Union * punion = static_cast<Union*>(node);
-		cout << ">union " << endl;
+		cout << "> Union " << endl;
 		printNode(punion->left, current_prof, table_symboles);
 		printNode(punion->right, current_prof, table_symboles);
 	} else if(node->classname == STAR) {
 		Star * star = static_cast<Star*>(node);
-		cout << ">star " << endl;
+		cout << "> Star " << endl;
 		printNode(star->Star_e, current_prof, table_symboles);
 	} else if(node->classname == UN) {
 		Un * un = static_cast<Un*>(node);
-		cout << ">UN " << endl;
+		cout << "> UN " << endl;
 		printNode(un->Un_e, current_prof, table_symboles);
 	} else if(node->classname == ATOM) {
 		Atom * atom = static_cast<Atom*>(node);
-		cout << "> " << table_symboles[atom->code] << endl; ;
+		cout << "> code : " << atom->code << " | char : '" << table_symboles[atom->code] << "' | action : " << atom->action << endl; ;
 	}
 }
 

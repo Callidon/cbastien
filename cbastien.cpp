@@ -9,10 +9,10 @@ int main() {
 	table_symboles_init(table);
 
 	// Test de la forêt
-	/*Go* go = GenForest();
+	Go* go = GenForest();
 	printForest(go, table);
 
-	delete go;*/
+	delete go;
 
 	// Test du scanner
 	/*Scanner * scanner = new Scanner;
