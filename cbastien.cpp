@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 	// init de la table des symboles
 	table_symboles_t table;
-	table_symboles_init(table);
+	table_init_dicoT(table);
 
 	// Test de la forêt
 	Go* go = GenForest();
@@ -26,9 +26,7 @@ int main() {
 	// Test de l'analyseur
 	//on scan le premier token avant
 	scan(scanner, table);
-	bool correct = false;
-	analyse(go[0], go, correct, scanner, table);
-	cout << "analyse de grammar.txt : " << correct << endl;
+	cout << "analyse de grammar.txt : " << analyse(go[0], go, scanner, table) << endl;
 
 	close_scanner(scanner);
 	delete go;

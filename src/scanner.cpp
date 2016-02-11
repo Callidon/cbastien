@@ -1,5 +1,7 @@
 #include "scanner.hpp"
 #include <iostream>
+#include <stdlib.h>
+
 using namespace std;
 
 /*
@@ -11,6 +13,7 @@ void init_scanner(string filename, scanner_t * scanner) {
 	scanner->token = new token_t;
 	scanner->token->chaine = "";
 	scanner->token->code = 0;
+	scanner->token->action = 0;
 }
 
 /*
@@ -30,16 +33,24 @@ void close_scanner(scanner_t * scanner) {
 void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
 	char current;
 	string token = "";
+	string action = "";
 	int code = -1;
-	// TODO add action
+	bool reading_action = false;
 	while((! scanner->file->eof())) {
 		current = scanner->file->get();
 		if((current == ' ') || current == '\n') {
+			scanner_consume_blanks(scanner);
 			break;
 		} else if(current == '\'') {
 			// cas où c'est ELTER, on set le code et on saute la quote
 			scanner->token->AType = Terminal;
 			code = 17;
+		} else if (current == '#') {
+			// cas d'une action à ajouter au token
+			scanner_consume_blanks(scanner);
+			reading_action = true;
+		} else if(reading_action) {
+			action += current;
 		} else {
 			token += current;
 		}
@@ -55,6 +66,25 @@ void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
 	}
 	scanner->token->chaine = token;
 	scanner->token->code = code;
+	if(action == "") {
+		scanner->token->action = 0;
+	} else {
+		scanner->token->action = atoi(action.c_str());
+	}
+}
+
+/*
+ * Avance le scanner jusqu'au prochain token en passant les blancs et \n
+ */
+void scanner_consume_blanks(scanner_t * scanner) {
+	char current;
+	char next = scanner->file->peek();
+	while((! scanner->file->eof())) {
+		if((next != ' ') && next != '\n')
+			break;
+		current = scanner->file->get();
+		next = scanner->file->peek();
+	}
 }
 
 /*

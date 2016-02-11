@@ -10,7 +10,7 @@
 typedef struct {
 	std::string chaine;
 	int code;
-	std::string action;
+	int action;
 	ATOMTYPE AType;
 } token_t;
 
@@ -34,6 +34,11 @@ void close_scanner(scanner_t * scanner);
  * Fait avancer le scanner d'un token
  */
 void scan(scanner_t * scanner, table_symboles_t & table_symboles);
+
+/*
+ * Avance le scanner jusqu'au prochain token en passant les blancs et \n
+ */
+void scanner_consume_blanks(scanner_t * scanner);
 
 /*
  * Imprime un token dans la sortie standard
