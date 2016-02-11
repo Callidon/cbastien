@@ -11,3 +11,13 @@ void table_symboles_init(table_symboles_t & table) {
 		table[i] = symboles[i];
 	}
 }
+
+int table_get_code(table_symboles_t & table, string symbole) {
+	int code = -1;
+	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
+		if(it->second == symbole) {
+			return it->first;
+		}
+	}
+	return code;
+}

@@ -61,8 +61,8 @@ Atom* GenAtom(int code, int action, ATOMTYPE type) {
  * Génère le tableau contenant la grammaire des grammaires
  */
 Go* GenForest() {
-	// 0 = IDNTER, 1 = ELTER, 2 = (/, 3 = /)
 	Go * go = new Go[5];
+	// règle S
 	go[0] = GenConc(
 				GenStar(
 					GenConc(
@@ -77,18 +77,18 @@ Go* GenForest() {
 				),
 				GenAtom(5, 0, Terminal)
 			);
-	// règle N TODO : mettre bon code ascii
-	go[1] = GenAtom(16, 0, NonTerminal);
+	// règle N
+	go[1] = GenAtom(16, 0, Terminal);
 	// règle E
 	go[2] = GenConc(GenAtom(3, 0 , NonTerminal), GenStar(GenConc(GenAtom(7, 0, Terminal), GenAtom(3, 0, NonTerminal))));
 	// règle T
 	go[3] = GenConc(GenAtom(4, 0 , NonTerminal), GenStar(GenConc(GenAtom(8, 0, Terminal), GenAtom(4, 0, NonTerminal))));
-	// règle F TODO : mettre bon code ascii
+	// règle F
 	go[4] = GenUnion(
 				GenUnion(
 					GenUnion(
 						GenUnion(
-							GenAtom(16, 0, NonTerminal), GenAtom(17, 0, Terminal)
+							GenAtom(16, 0, Terminal), GenAtom(17, 0, Terminal)
 						),
 							GenConc(
 								GenAtom(10, 0, Terminal),

@@ -1,5 +1,6 @@
 #include "generators.hpp"
 #include "scanner.hpp"
+#include "analyser.hpp"
 #include <iostream>
 using namespace std;
 
@@ -10,17 +11,26 @@ int main() {
 
 	// Test de la forêt
 	Go* go = GenForest();
-	printForest(go, table);
-
-	delete go;
+	//printForest(go, table);
 
 	// Test du scanner
-	/*Scanner * scanner = new Scanner;
-	init_scanner("README.md", scanner);
-	scan(scanner);
-	cout << scanner->token << endl;
-	scan(scanner);
-	cout << scanner->token << endl;
-	close_scanner(scanner);*/
+	scanner_t * scanner = new scanner_t;
+	init_scanner("grammar.txt", scanner);
+	/*scan(scanner, table);
+	print_token(scanner->token, table);
+	scan(scanner, table);
+	print_token(scanner->token, table);
+	scan(scanner, table);
+	print_token(scanner->token, table);*/
+
+	// Test de l'analyseur
+	//on scan le premier token avant
+	scan(scanner, table);
+	bool correct = false;
+	analyse(go[0], go, correct, scanner, table);
+	cout << "analyse de grammar.txt : " << correct << endl;
+
+	close_scanner(scanner);
+	delete go;
 	return 1;
 }
