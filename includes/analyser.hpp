@@ -8,6 +8,6 @@
 /*
  * Fonction analysant une grammaire pour vérifier si elle est correcte
  */
-bool analyse(Node * node, Go * go, scanner_t * scanner, table_symboles_t & table);
+bool analyse(Node * node, Go & go, scanner_t * scanner, table_symboles_t & table);
 
 #endif

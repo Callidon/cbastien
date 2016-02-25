@@ -1,6 +1,8 @@
 #ifndef STRUCTURES_HPP
 #define STRUCTURES_HPP
 
+#include <map>
+
 // Type d'une feuille
 enum ATOMTYPE {
 	Terminal,
@@ -56,6 +58,6 @@ typedef struct _Atom : public Node {
 } Atom;
 
 // Tableau de la grammaire des grammaires
-typedef Node* Go;
+typedef std::map<int, Node*> Go;
 
 #endif

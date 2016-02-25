@@ -10,25 +10,19 @@ int main() {
 	table_init(table);
 
 	// Test de la forêt
-	Go* go = GenForest();
+	Go go;
+	GenForest(go);
 	//printForest(go, table);
 
 	// Test du scanner
 	scanner_t * scanner = new scanner_t;
 	init_scanner("grammar.txt", scanner);
-	/*scan(scanner, table);
-	print_token(scanner->token, table);
-	scan(scanner, table);
-	print_token(scanner->token, table);
-	scan(scanner, table);
-	print_token(scanner->token, table);*/
 
 	// Test de l'analyseur
-	//on scan le premier token avant
+	//on scan le premier token avant d'analyser
 	scan(scanner, table);
 	cout << "analyse de grammar.txt : " << analyse(go[0], go, scanner, table) << endl;
 
 	close_scanner(scanner);
-	delete go;
 	return 1;
 }

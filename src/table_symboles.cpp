@@ -6,6 +6,9 @@ using namespace std;
 
 const int NB_SYMBOLES = 18;
 
+/*
+ * Fonction initialisant une table de symboles
+ */
 void table_init(table_symboles_t & table) {
 	int i = 0;
 	string symboles[NB_SYMBOLES] = {"S", "N", "E", "T", "F", ";", "->", "+", ".", ",", "(", ")", "[", "]", "(/", "/)","IDNTER", "ELTER"};
@@ -14,6 +17,9 @@ void table_init(table_symboles_t & table) {
 	}
 }
 
+/*
+ * Fonction renvoyant le code associé à un symbole, et renvoyant -1 en cas de symbole non trouvé
+ */
 int table_get_code(table_symboles_t & table, string symbole) {
 	int code = -1;
 	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
@@ -25,6 +31,9 @@ int table_get_code(table_symboles_t & table, string symbole) {
 	return code;
 }
 
+/*
+ * Fonction renvoyant le code associé à un symbole, et ajoutant le symbole s'il n'existe pas dans la table
+ */
 int table_search_code(table_symboles_t & table, string symbole) {
 	int code;
 	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
@@ -38,7 +47,10 @@ int table_search_code(table_symboles_t & table, string symbole) {
 	return code;
 }
 
-void go_action(table_symboles_t & table, Go * go, string symbole, int action, ATOMTYPE catype) {
+/*
+ * Fonction effectuant une action lié à la grammaire Go
+ */
+void go_action(table_symboles_t & table, Go & go, string symbole, int action, ATOMTYPE catype) {
 	Node * node_a, * node_b;
 	stack<Node*> pile;
 	switch(action) {

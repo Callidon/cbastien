@@ -6,7 +6,7 @@ using namespace std;
 /*
  * Génère un noeud de type Conc
  */
-Conc* GenConc(Node* pleft, Node* pright) {
+Node * GenConc(Node * pleft, Node * pright) {
 	Conc * pconc = new Conc;
 	pconc->left = pleft;
 	pconc->right = pright;
@@ -17,7 +17,7 @@ Conc* GenConc(Node* pleft, Node* pright) {
 /*
  * Génère un noeud de type Union
  */
-Union* GenUnion(Node* pleft, Node* pright) {
+Node * GenUnion(Node * pleft, Node * pright) {
 	Union * punion = new Union;
 	punion->left = pleft;
 	punion->right = pright;
@@ -28,7 +28,7 @@ Union* GenUnion(Node* pleft, Node* pright) {
 /*
  * Génère un noeud de type Star
  */
-Star * GenStar(Node* ptr) {
+Node * GenStar(Node * ptr) {
 	Star * pstar = new Star;
 	pstar->Star_e = ptr;
 	pstar->classname = STAR;
@@ -38,7 +38,7 @@ Star * GenStar(Node* ptr) {
 /*
  * Génère un noeud de type UN
  */
-Un * GenUN(Node* ptr) {
+Node * GenUN(Node * ptr) {
 	Un * pun = new Un;
 	pun->Un_e = ptr;
 	pun->classname = UN;
@@ -48,7 +48,7 @@ Un * GenUN(Node* ptr) {
 /*
  * Génère un noeud de type Atom
  */
-Atom* GenAtom(int code, int action, ATOMTYPE type) {
+Node * GenAtom(int code, int action, ATOMTYPE type) {
 	Atom * patom = new Atom;
 	patom->code = code;
 	patom->action = action;
@@ -60,8 +60,7 @@ Atom* GenAtom(int code, int action, ATOMTYPE type) {
 /*
  * Génère le tableau contenant la grammaire des grammaires
  */
-Go* GenForest() {
-	Go * go = new Go[5];
+void GenForest(Go & go) {
 	// règle S
 	go[0] = GenConc(
 				GenStar(
@@ -111,7 +110,6 @@ Go* GenForest() {
 						)
 					)
 				);
-	return go;
 }
 
 /*
@@ -150,7 +148,7 @@ void printNode(Node* node, int prof, table_symboles_t & table_symboles) {
 /*
  * Affiche dans la sortie les arbres de la grammaire des grammaires
  */
-void printForest(Go* forest, table_symboles_t & table_symboles) {
+void printForest(Go & forest, table_symboles_t & table_symboles) {
 	cout << "Règle S" << endl;
 	printNode(forest[0], 0, table_symboles);
 	cout << "Règle N" << endl;

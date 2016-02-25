@@ -5,7 +5,7 @@ using namespace std;
 /*
  * Fonction analysant une grammaire pour vérifier si elle est correcte
  */
-bool analyse(Node * node, Go * go, scanner_t * scanner, table_symboles_t & table) {
+bool analyse(Node * node, Go & go, scanner_t * scanner, table_symboles_t & table) {
 	bool correct = false;
 	switch(node->classname) {
 		// cas d'un noeud Conc
@@ -47,7 +47,7 @@ bool analyse(Node * node, Go * go, scanner_t * scanner, table_symboles_t & table
 				case Terminal: {
 					if(atom->code == scanner->token->code) {
 						if(atom->action != 0) {
-							// do action
+							go_action(table, go, scanner->token->chaine, scanner->token->action, Terminal);
 						}
 						scan(scanner, table);
 						correct = true;
@@ -57,7 +57,7 @@ bool analyse(Node * node, Go * go, scanner_t * scanner, table_symboles_t & table
 				case NonTerminal: {
 					if(analyse(go[atom->code], go, scanner, table)) {
 						if(atom->action != 0) {
-							// do action
+							go_action(table, go, scanner->token->chaine, scanner->token->action, NonTerminal);
 						}
 						correct = true;
 					}
