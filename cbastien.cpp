@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 	// init de la table des symboles
 	table_symboles_t table;
-	table_init_dicoT(table);
+	table_init(table);
 
 	// Test de la forêt
 	Go* go = GenForest();
