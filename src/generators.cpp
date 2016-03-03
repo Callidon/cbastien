@@ -71,23 +71,23 @@ void GenForest(Go & go) {
 							),
 							GenAtom(2, 0 , NonTerminal)
 						),
-						GenAtom(9, 0, Terminal)
+						GenAtom(9, 1, Terminal)
 					)
 				),
 				GenAtom(5, 0, Terminal)
 			);
 	// règle N
-	go[1] = GenAtom(16, 0, Terminal);
+	go[1] = GenAtom(16, 2, Terminal);
 	// règle E
-	go[2] = GenConc(GenAtom(3, 0 , NonTerminal), GenStar(GenConc(GenAtom(7, 0, Terminal), GenAtom(3, 0, NonTerminal))));
+	go[2] = GenConc(GenAtom(3, 0 , NonTerminal), GenStar(GenConc(GenAtom(7, 0, Terminal), GenAtom(3, 3, NonTerminal))));
 	// règle T
-	go[3] = GenConc(GenAtom(4, 0 , NonTerminal), GenStar(GenConc(GenAtom(8, 0, Terminal), GenAtom(4, 0, NonTerminal))));
+	go[3] = GenConc(GenAtom(4, 0 , NonTerminal), GenStar(GenConc(GenAtom(8, 0, Terminal), GenAtom(4, 4, NonTerminal))));
 	// règle F
 	go[4] = GenUnion(
 				GenUnion(
 					GenUnion(
 						GenUnion(
-							GenAtom(16, 0, Terminal), GenAtom(17, 0, Terminal)
+							GenAtom(16, 5, Terminal), GenAtom(17, 5, Terminal)
 						),
 							GenConc(
 								GenAtom(10, 0, Terminal),
@@ -99,14 +99,14 @@ void GenForest(Go & go) {
 						GenConc(
 							GenAtom(12, 0, Terminal),
 							GenConc(
-								GenAtom(2, 0, NonTerminal), GenAtom(13, 0, Terminal)
+								GenAtom(2, 0, NonTerminal), GenAtom(13, 6, Terminal)
 							)
 						)
 					),
 					GenConc(
 						GenAtom(14, 0 , Terminal),
 						GenConc(
-							GenAtom(2, 0, NonTerminal), GenAtom(15, 0, Terminal)
+							GenAtom(2, 0, NonTerminal), GenAtom(15, 7, Terminal)
 						)
 					)
 				);
@@ -149,14 +149,8 @@ void printNode(Node* node, int prof, table_symboles_t & table_symboles) {
  * Affiche dans la sortie les arbres de la grammaire des grammaires
  */
 void printForest(Go & forest, table_symboles_t & table_symboles) {
-	cout << "Règle S" << endl;
-	printNode(forest[0], 0, table_symboles);
-	cout << "Règle N" << endl;
-	printNode(forest[1], 0, table_symboles);
-	cout << "Règle E" << endl;
-	printNode(forest[2], 0, table_symboles);
-	cout << "Règle T" << endl;
-	printNode(forest[3], 0, table_symboles);
-	cout << "Règle F" << endl;
-	printNode(forest[4], 0, table_symboles);
+	for (map<int, Node*>::iterator it = forest.begin(); it != forest.end(); ++it) {
+		cout << "Règle " << table_symboles[it->first] << " : " << endl;
+		printNode(it->second, 0, table_symboles);
+	}
 }

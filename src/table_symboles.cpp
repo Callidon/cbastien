@@ -1,4 +1,4 @@
-#include <stack>
+#include <iostream>
 #include "table_symboles.hpp"
 #include "generators.hpp"
 
@@ -42,7 +42,7 @@ int table_search_code(table_symboles_t & table, string symbole) {
 		}
 	}
 	// si le code n'a pas été trouvé, on ajoute l'élément
-	code = table.end()->first + 1;
+	code = table.end()->first;
 	table[code] = symbole;
 	return code;
 }
@@ -50,21 +50,20 @@ int table_search_code(table_symboles_t & table, string symbole) {
 /*
  * Fonction effectuant une action lié à la grammaire Go
  */
-void go_action(table_symboles_t & table, Go & go, string symbole, int action, ATOMTYPE catype) {
+void go_action(table_symboles_t & table, Go & go, stack<Node*> & pile, string symbole, int atom_action, int symbole_action, ATOMTYPE catype) {
 	Node * node_a, * node_b;
-	stack<Node*> pile;
-	switch(action) {
+	switch(atom_action) {
 		case 1 : {
 			node_a = pile.top();
 			pile.pop();
 			node_b = pile.top();
 			pile.pop();
 			Atom * atom = static_cast<Atom*>(node_b);
-			go[atom->code + 5] = node_a;
+			go[atom->code] = node_a;
 		}
 			break;
 		case 2 : {
-			pile.push(GenAtom(table_search_code(table, symbole), action, catype));
+			pile.push(GenAtom(table_search_code(table, symbole), symbole_action, catype));
 		}
 			break;
 		case 3 : {
@@ -85,9 +84,9 @@ void go_action(table_symboles_t & table, Go & go, string symbole, int action, AT
 			break;
 		case 5 : {
 			if(catype == Terminal) {
-				pile.push(GenAtom(table_search_code(table, symbole), action, Terminal));
+				pile.push(GenAtom(table_search_code(table, symbole), symbole_action, Terminal));
 			} else {
-				pile.push(GenAtom(table_search_code(table, symbole), action, NonTerminal));
+				pile.push(GenAtom(table_search_code(table, symbole), symbole_action, NonTerminal));
 			}
 		}
 			break;
