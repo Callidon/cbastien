@@ -7,8 +7,14 @@
 typedef std::vector<int> PcodeStack;
 typedef std::vector<int> ExecStack;
 
+/*
+ * Méthode exécutant une série d'instructions Pcode
+ */
 void execute(PcodeStack & pile_pcode);
 
-void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, unsigned int co, unsigned int spx);
+/*
+ * Méthode interpérant la prochaine instruction Pcode dans une pile d'instructions
+ */
+void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx);
 
 #endif
