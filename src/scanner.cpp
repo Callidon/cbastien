@@ -55,10 +55,10 @@ void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
 			token += current;
 		}
 	}
-	// recherche du code correspondant au token, s'il n'a pas déjà été déterminé
+	// recherche du code correspondant au token dans la Go, s'il n'a pas déjà été déterminé
 	if(code == -1) {
 		scanner->token->AType = NonTerminal;
-		code = table_get_code(table_symboles, token);
+		code = table_go_get(table_symboles, token);
 		// si le code n'a pas été trouvé, c'est un Non Terminal
 		if(code == -1) {
 			code = 16;

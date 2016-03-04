@@ -18,9 +18,29 @@ void table_init(table_symboles_t & table) {
 }
 
 /*
+ * Fonction renvoyant le code associé à un symbole parmi ceux spécifiques à la Go, et renvoyant -1 en cas de symbole non trouvé
+ */
+int table_go_get(table_symboles_t & table, string symbole) {
+	int code = -1;
+	int cpt = 0;
+	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
+		// si on a dépassé les symbole de la Go, on renvoie -1
+		if(cpt >= NB_SYMBOLES) {
+			return -1;
+		}
+		if(it->second == symbole) {
+			return it->first;
+		}
+		cpt++;
+	}
+	// si le code n'a pas été trouvé, on retorune -1
+	return code;
+}
+
+/*
  * Fonction renvoyant le code associé à un symbole, et renvoyant -1 en cas de symbole non trouvé
  */
-int table_get_code(table_symboles_t & table, string symbole) {
+int table_get(table_symboles_t & table, string symbole) {
 	int code = -1;
 	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
 		if(it->second == symbole) {

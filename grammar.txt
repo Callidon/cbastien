@@ -1,2 +1,2 @@
-A -> 'a' . IDNTER ,
-IDNTER -> 'b' , ;
+A -> 'a' . I . M ,
+I -> 'b' , ;

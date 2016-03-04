@@ -64,7 +64,6 @@ bool analyse(Node * node, Go & go, stack<Node*> & pile, scanner_t * scanner, tab
 				}
 					break;
 			}
-			cout << "token : " << scanner->token->chaine << " booléen : " << correct << endl;
 		}
 			break;
 	}
