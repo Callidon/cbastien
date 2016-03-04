@@ -13,8 +13,6 @@ bool analyse(Node * node, Go & go, stack<Node*> & pile, scanner_t * scanner, tab
 			Conc * conc = static_cast<Conc*>(node);
 			if(analyse(conc->left, go, pile, scanner, table)) {
 				correct = analyse(conc->right, go, pile, scanner, table);
-			} else {
-				cout << "foirage else conc" << endl;
 			}
 		}
 			break;
@@ -25,9 +23,6 @@ bool analyse(Node * node, Go & go, stack<Node*> & pile, scanner_t * scanner, tab
 				correct = true;
 			} else {
 				correct = analyse(punion->right, go, pile, scanner, table);
-				if(! correct) {
-					cout << "foirage else union" << endl;
-				}
 			}
 		}
 			break;
@@ -56,8 +51,6 @@ bool analyse(Node * node, Go & go, stack<Node*> & pile, scanner_t * scanner, tab
 						}
 						scan(scanner, table);
 						correct = true;
-					} else {
-						cout << "foirage else term" << endl;
 					}
 				}
 					break;
@@ -67,12 +60,11 @@ bool analyse(Node * node, Go & go, stack<Node*> & pile, scanner_t * scanner, tab
 							go_action(table, go, pile, scanner->token->chaine, atom->action, scanner->token->action, NonTerminal);
 						}
 						correct = true;
-					} else {
-						cout << "foirage else non term" << endl;
 					}
 				}
 					break;
 			}
+			cout << "token : " << scanner->token->chaine << " booléen : " << correct << endl;
 		}
 			break;
 	}
