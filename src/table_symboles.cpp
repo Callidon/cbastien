@@ -10,9 +10,8 @@ const int NB_SYMBOLES = 18;
  * Fonction initialisant une table de symboles
  */
 void table_init(table_symboles_t & table) {
-	int i = 0;
 	string symboles[NB_SYMBOLES] = {"S", "N", "E", "T", "F", ";", "->", "+", ".", ",", "(", ")", "[", "]", "(/", "/)", "IDNTER", "ELTER"};
-	for(i = 0; i < NB_SYMBOLES; i++) {
+	for (int i = 0; i < NB_SYMBOLES; i++) {
 		table[i] = symboles[i];
 	}
 }
@@ -21,15 +20,15 @@ void table_init(table_symboles_t & table) {
  * Fonction renvoyant le code associé à un symbole parmi ceux spécifiques à la Go, et renvoyant -1 en cas de symbole non trouvé
  */
 int table_go_get(table_symboles_t & table, string symbole) {
-	int code = -1;
-	int cpt = 0;
-	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
+	int code = -1,
+		cpt = 0;
+	for (auto & it : table) {
 		// si on a dépassé les symbole de la Go, on renvoie -1
-		if(cpt >= NB_SYMBOLES) {
+		if (cpt >= NB_SYMBOLES) {
 			return -1;
 		}
-		if(it->second == symbole) {
-			return it->first;
+		if (it.second == symbole) {
+			return it.first;
 		}
 		cpt++;
 	}
@@ -42,9 +41,9 @@ int table_go_get(table_symboles_t & table, string symbole) {
  */
 int table_get(table_symboles_t & table, string symbole) {
 	int code = -1;
-	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
-		if(it->second == symbole) {
-			return it->first;
+	for (auto & it : table) {
+		if (it.second == symbole) {
+			return it.first;
 		}
 	}
 	// si le code n'a pas été trouvé, on retorune -1
@@ -56,9 +55,9 @@ int table_get(table_symboles_t & table, string symbole) {
  */
 int table_search_code(table_symboles_t & table, string symbole) {
 	int code;
-	for (map<int, string>::iterator it = table.begin(); it != table.end(); ++it) {
-		if(it->second == symbole) {
-			return it->first;
+	for (auto & it : table) {
+		if (it.second == symbole) {
+			return it.first;
 		}
 	}
 	// si le code n'a pas été trouvé, on ajoute l'élément
@@ -72,7 +71,7 @@ int table_search_code(table_symboles_t & table, string symbole) {
  */
 void go_action(table_symboles_t & table, Go & go, stack<Node*> & pile, string symbole, int atom_action, int symbole_action, ATOMTYPE catype) {
 	Node * node_a, * node_b;
-	switch(atom_action) {
+	switch (atom_action) {
 		case 1 : {
 			node_a = pile.top();
 			pile.pop();
@@ -103,7 +102,7 @@ void go_action(table_symboles_t & table, Go & go, stack<Node*> & pile, string sy
 		}
 			break;
 		case 5 : {
-			if(catype == Terminal) {
+			if (catype == Terminal) {
 				pile.push(GenAtom(table_search_code(table, symbole), symbole_action, Terminal));
 			} else {
 				pile.push(GenAtom(table_search_code(table, symbole), symbole_action, NonTerminal));

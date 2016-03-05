@@ -23,25 +23,25 @@ void close_scanner(scanner_t * scanner) {
 	if(scanner->file->is_open()) {
 		scanner->file->close();
 	}
-	delete scanner->token;
-	delete scanner;
+	delete scanner->token, scanner;
 }
 
 /*
  * Fait avancer le scanner d'un token
  */
 void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
-	char current;
-	string token = "";
-	string action = "";
 	int code = -1;
 	bool reading_action = false;
-	while((! scanner->file->eof())) {
+	char current;
+	string token = "",
+			action = "";
+
+	while (! scanner->file->eof()) {
 		current = scanner->file->get();
-		if((current == ' ') || current == '\n') {
+		if ((current == ' ') || current == '\n') {
 			scanner_consume_blanks(scanner);
 			break;
-		} else if(current == '\'') {
+		} else if (current == '\'') {
 			// cas où c'est ELTER, on set le code et on saute la quote
 			scanner->token->AType = Terminal;
 			code = 17;
@@ -49,24 +49,24 @@ void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
 			// cas d'une action à ajouter au token
 			scanner_consume_blanks(scanner);
 			reading_action = true;
-		} else if(reading_action) {
+		} else if (reading_action) {
 			action += current;
 		} else {
 			token += current;
 		}
 	}
 	// recherche du code correspondant au token dans la Go, s'il n'a pas déjà été déterminé
-	if(code == -1) {
+	if (code == -1) {
 		scanner->token->AType = NonTerminal;
 		code = table_go_get(table_symboles, token);
-		// si le code n'a pas été trouvé, c'est un Non Terminal
-		if(code == -1) {
+		// si le code n'a toujours pas été trouvé, c'est un Non Terminal
+		if (code == -1) {
 			code = 16;
 		}
 	}
 	scanner->token->chaine = token;
 	scanner->token->code = code;
-	if(action == "") {
+	if (action == "") {
 		scanner->token->action = 0;
 	} else {
 		scanner->token->action = atoi(action.c_str());
@@ -77,11 +77,12 @@ void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
  * Avance le scanner jusqu'au prochain token en passant les blancs et \n
  */
 void scanner_consume_blanks(scanner_t * scanner) {
-	char current;
-	char next = scanner->file->peek();
-	while((! scanner->file->eof())) {
-		if((next != ' ') && next != '\n')
+	char current,
+		next = scanner->file->peek();
+	while (! scanner->file->eof()) {
+		if ((next != ' ') && next != '\n') {
 			break;
+		}
 		current = scanner->file->get();
 		next = scanner->file->peek();
 	}

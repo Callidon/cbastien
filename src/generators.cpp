@@ -116,30 +116,31 @@ void GenForest(Go & go) {
  * Affiche dans la sortie standard l'arbre à partir d'un noeud
  */
 void printNode(Node* node, int prof, table_symboles_t & table_symboles) {
-	int ind = 0;
 	int current_prof = prof + 1;
-	for(ind = 0; ind < current_prof; ind++) {
+
+	for (int ind = 0; ind < current_prof; ind++) {
 		cout << "---";
 	}
-	if(node->classname == CONC) {
+
+	if (node->classname == CONC) {
 		Conc * conc = static_cast<Conc*>(node);
 		cout << "> Conc " << endl;
 		printNode(conc->left, current_prof, table_symboles);
 		printNode(conc->right, current_prof, table_symboles);
-	} else if(node->classname == UNION) {
+	} else if (node->classname == UNION) {
 		Union * punion = static_cast<Union*>(node);
 		cout << "> Union " << endl;
 		printNode(punion->left, current_prof, table_symboles);
 		printNode(punion->right, current_prof, table_symboles);
-	} else if(node->classname == STAR) {
+	} else if (node->classname == STAR) {
 		Star * star = static_cast<Star*>(node);
 		cout << "> Star " << endl;
 		printNode(star->Star_e, current_prof, table_symboles);
-	} else if(node->classname == UN) {
+	} else if (node->classname == UN) {
 		Un * un = static_cast<Un*>(node);
 		cout << "> UN " << endl;
 		printNode(un->Un_e, current_prof, table_symboles);
-	} else if(node->classname == ATOM) {
+	} else if (node->classname == ATOM) {
 		Atom * atom = static_cast<Atom*>(node);
 		cout << "> code : " << atom->code << " | char : '" << table_symboles[atom->code] << "' | action : " << atom->action << endl; ;
 	}
@@ -149,8 +150,8 @@ void printNode(Node* node, int prof, table_symboles_t & table_symboles) {
  * Affiche dans la sortie les arbres de la grammaire des grammaires
  */
 void printForest(Go & forest, table_symboles_t & table_symboles) {
-	for (map<int, Node*>::iterator it = forest.begin(); it != forest.end(); ++it) {
-		cout << "Règle " << table_symboles[it->first] << " : " << endl;
-		printNode(it->second, 0, table_symboles);
+	for (auto & it : forest) {
+		cout << "Règle " << table_symboles[it.first] << " : " << endl;
+		printNode(it.second, 0, table_symboles);
 	}
 }

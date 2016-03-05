@@ -24,7 +24,7 @@ int main() {
 	//on scan le premier token avant d'analyser
 	scan(scanner, table);
 	cout << "analyse de grammar.txt : " << analyse(go[0], go, pile, scanner, table) << endl;
-	//printForest(go, table);
+	printForest(go, table);
 
 	close_scanner(scanner);
 	return 1;
