@@ -38,7 +38,7 @@ void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
 
 	while (! scanner->file->eof()) {
 		current = scanner->file->get();
-		if ((current == ' ') || current == '\n') {
+		if ((current == ' ') || (current == '\n')) {
 			scanner_consume_blanks(scanner);
 			break;
 		} else if (current == '\'') {
@@ -70,6 +70,55 @@ void scan(scanner_t * scanner, table_symboles_t & table_symboles) {
 		scanner->token->action = 0;
 	} else {
 		scanner->token->action = atoi(action.c_str());
+	}
+}
+
+/*
+ * Initialise un scanner de gpl et ouvre le fichier dont le nom est passé en paramètre
+ */
+void init_scanner_gpl(string filename, scanner_gpl_t * scanner) {
+	scanner->file = new fstream;
+	scanner->file->open(filename, fstream::in);
+	scanner->token = new token_gpl_t;
+	scanner->token->value = "";
+	scanner->token->type = NONE;
+}
+
+/*
+ * Ferme un scanner de gpl sur un fichier
+ */
+void close_scanner_gpl(scanner_gpl_t * scanner) {
+	if(scanner->file->is_open()) {
+		scanner->file->close();
+	}
+	delete scanner->token, scanner;
+}
+
+/*
+ * Fait avancer le scanner de gpl d'un token
+ */
+void scan_gpl(scanner_gpl_t * scanner) {
+	char current;
+	string token = "";
+
+	// on scanne tout le token
+	while (! scanner->file->eof()) {
+		current = scanner->file->get();
+		if ((current == ' ') || (current == '\n')) {
+			break;
+		}
+		token += current;
+	}
+	scanner->token->value = token;
+
+	// on détermine le type du token
+	int ascii_first = int(token[0]);
+	if( (ascii_first >= 49) && (ascii_first <= 57) ) {
+		scanner->token->type = ENT;
+	} else if (  ( (ascii_first >= 65) && (ascii_first <= 90) ) || ( (ascii_first >= 97) && (ascii_first <= 122) ) ) {
+		scanner->token->type = IDENT;
+	} else {
+		scanner->token->type = SYMB;
 	}
 }
 
