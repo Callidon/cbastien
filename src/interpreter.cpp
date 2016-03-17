@@ -64,22 +64,22 @@ void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx) {
 
 		// Opérateurs relationnels
 		case SUP : {
-			operateur([](int a, int b) -> int { a > b; });
+			operateur([](int a, int b) -> int { return a > b; });
 		} break;
 		case SUPE : {
-			operateur([](int a, int b) -> int { a >= b; });
+			operateur([](int a, int b) -> int { return a >= b; });
 		} break;
 		case INF : {
-			operateur([](int a, int b) -> int { a < b; });
+			operateur([](int a, int b) -> int { return a < b; });
 		} break;
 		case INFE : {
-			operateur([](int a, int b) -> int { a <= b; });
+			operateur([](int a, int b) -> int { return a <= b; });
 		} break;
 		case EQ : {
-			operateur([](int a, int b) -> int { a == b; });
+			operateur([](int a, int b) -> int { return a == b; });
 		} break;
 		case DIFF : {
-			operateur([](int a, int b) -> int { a != b; });
+			operateur([](int a, int b) -> int { return a != b; });
 		} break;
 
 		// Instructions I/O
@@ -111,16 +111,16 @@ void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx) {
 
 		// Opérateurs mathématiques
 		case ADD : {
-			operateur([](int a, int b) -> int { a + b; });
+			operateur([](int a, int b) -> int { return a + b; });
 		} break;
 		case MOINS : {
-			operateur([](int a, int b) -> int { a - b; });
+			operateur([](int a, int b) -> int { return a - b; });
 		} break;
 		case DIV : {
-			operateur([](int a, int b) -> int { a / b; });
+			operateur([](int a, int b) -> int { return a / b; });
 		} break;
 		case MULT : {
-			operateur([](int a, int b) -> int { a * b; });
+			operateur([](int a, int b) -> int { return a * b; });
 		} break;
 		case NEQ : {
 			pile_x[spx] = 0 - pile_x[spx];
@@ -137,10 +137,10 @@ void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx) {
 
 		// Opérateurs logiques
 		case AND : {
-			operateur([](int a, int b) -> int { a && b; });
+			operateur([](int a, int b) -> int { return a && b; });
 		} break;
 		case OR : {
-			operateur([](int a, int b) -> int { a || b; });
+			operateur([](int a, int b) -> int { return a || b; });
 		} break;
 		case NOT : {
 			pile_x[spx] = (! pile_x[spx]);
