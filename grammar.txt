@@ -1,3 +1,2 @@
-A -> (/ 'a' /) + I#12 . M ,
-I -> 'b'#157 ,
-M -> I + 'c' , ;
+Prgm -> 'Program' . 'ident' . (/ Decl_const /) . (/ Decl_var /) . (/ Decl_tab /) . (/ Decl_fonction /) . Bloc . '.' ,
+Decl_const -> 'cont' . 'ident' . '=' . 'Ent' . ';' . [ 'ident' . '=' . 'Ent' . ';' ] , ;
