@@ -39,4 +39,11 @@ void go_action(table_symboles_t &table, Go &go, std::stack<Node *> &pile,
                std::string symbole, int atom_action, int symbole_action,
                ATOMTYPE catype);
 
+/*
+ * Fonction effectuant une action lié à la grammaire GPL
+ */
+void gpl_action(table_symboles_t &table, Go &go, std::stack<Node *> &pile,
+			    std::string symbole, int atom_action, int symbole_action,
+			    ATOMTYPE catype);
+
 #endif

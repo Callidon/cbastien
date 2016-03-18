@@ -6,6 +6,9 @@
 #ifndef SCANNER_HPP
 #define SCANNER_HPP
 
+// Type d'un token reconnu par le scanner_gpl
+enum TokenGPLType { ENT = 1, IDENT = 2, SYMB = 3, NONE = 4 };
+
 // Structure représentant un token
 typedef struct {
   std::string chaine;
@@ -14,13 +17,11 @@ typedef struct {
   ATOMTYPE AType;
 } token_t;
 
-// Type d'un token reconnu par le scanner_gpl
-enum TokenGPLType { ENT = 1, IDENT = 2, SYMB = 3, NONE = 4 };
-
 // Structure représentant un token utilisable par la GPL
 typedef struct {
   TokenGPLType type;
   std::string value;
+  int code;
 } token_gpl_t;
 
 // Structure représentant un scanner de tokens
@@ -64,7 +65,7 @@ void close_scanner_gpl(scanner_gpl_t *scanner);
 /*
  * Fait avancer le scanner de gpl d'un token
  */
-void scan_gpl(scanner_gpl_t *scanner);
+void scan_gpl(scanner_gpl_t *scanner, table_symboles_t & table);
 
 /*
  * Avance le scanner jusqu'au prochain token en passant les blancs et \n

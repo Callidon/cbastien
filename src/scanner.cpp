@@ -98,7 +98,7 @@ void close_scanner_gpl(scanner_gpl_t *scanner) {
 /*
  * Fait avancer le scanner de gpl d'un token
  */
-void scan_gpl(scanner_gpl_t *scanner) {
+void scan_gpl(scanner_gpl_t *scanner, table_symboles_t & table) {
   char current;
   string token = "";
 
@@ -115,12 +115,18 @@ void scan_gpl(scanner_gpl_t *scanner) {
   // on détermine le type du token
   int ascii_first = int(token[0]);
   if ((ascii_first >= 49) && (ascii_first <= 57)) {
+	// cas d'un entier
     scanner->token->type = ENT;
+	scanner->token->code = table_get(table, token);
   } else if (((ascii_first >= 65) && (ascii_first <= 90)) ||
              ((ascii_first >= 97) && (ascii_first <= 122))) {
+	// cas d'un identificateur
     scanner->token->type = IDENT;
+	scanner->token->code = table_get(table, "ident");
   } else {
+	// cas d'un symbole (==, <, <=, etc)
     scanner->token->type = SYMB;
+	scanner->token->code = table_get(table, token);
   }
 }
 
