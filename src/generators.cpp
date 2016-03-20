@@ -123,7 +123,6 @@ void printNode(Node *node, int prof, table_symboles_t &table_symboles) {
     cout << "> code : " << atom->code << " | char : '"
          << table_symboles[atom->code] << "' | action : " << atom->action
          << endl;
-    ;
   }
 }
 
@@ -132,7 +131,7 @@ void printNode(Node *node, int prof, table_symboles_t &table_symboles) {
  */
 void printForest(Go &forest, table_symboles_t &table_symboles) {
   for (auto &it : forest) {
-    cout << "Règle " << table_symboles[it.first] << " : " << endl;
+    cout << "Règle[" << it.first << "] " << table_symboles[it.first] << " : " << endl;
     printNode(it.second, 0, table_symboles);
   }
 }

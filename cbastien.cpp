@@ -34,7 +34,8 @@ int main(int argc, char* argv[]) {
 			prog_filename.assign(argv[3]);
 
 			// init de la pile de symboles
-			stack<Node*> pile;
+			stack<Node*> pile_node;
+			stack<int> pile_pcode;
 
 			// init des scanners de la GO & de la GPL
 			scanner_t * scanner = new scanner_t;
@@ -42,11 +43,17 @@ int main(int argc, char* argv[]) {
 			init_scanner(grammar_filename, scanner);
 			init_scanner_gpl(prog_filename, scanner_gpl);
 
-			// Test de l'analyseur
+			// Test de l'analyseur de GO
 			//on scan le premier token avant d'analyser
 			scan(scanner, table);
-			cout << "analyse de grammar.txt : " << analyse_go(go[0], go, pile, scanner, table) << endl;
+			cout << "analyse de grammar.txt : " << analyse_go(go[0], go, pile_node, scanner, table) << endl;
 			printForest(go, table);
+
+
+			// IMPORTANT : le premier symbole de la GPL est forcément à la case 18 de go
+			// test de l'analyseur de GPL
+			scan_gpl(scanner_gpl, table);
+			cout << "analyse de main.txt : " << analyse_gpl(go[18], go, pile_pcode, scanner_gpl, table) << endl;
 
 			close_scanner(scanner);
 			close_scanner_gpl(scanner_gpl);

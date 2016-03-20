@@ -72,7 +72,7 @@ bool analyse_go(Node *node, Go &go, stack<Node *> &pile, scanner_t *scanner,
  * Fonction analysant une grammaire pour vérifier si elle est correcte par
  * rapport à la GPL
  */
-bool analyse_gpl(Node *node, Go &go, std::stack<Node *> &pile,
+bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile,
                  scanner_gpl_t *scanner, table_symboles_t &table) {
   bool correct = false;
   switch (node->classname) {
