@@ -43,7 +43,7 @@ typedef struct _Atom : public Node {
   int code;
   int action;
   ATOMTYPE AType;
-  ~_Atom() {}
+  ~_Atom() = default;
 } Atom;
 
 // Tableau de la grammaire des grammaires
