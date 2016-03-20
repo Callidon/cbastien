@@ -1,4 +1,4 @@
-Prgm -> 'Program' . 'ident' . (/ Decl_const /) . (/ Decl_var /) . (/ Decl_fonction /) . Bloc . '.' ,
+Prgm -> 'Program' . 'ident' . (/ Decl_const /) . (/ Decl_var /) . (/ Decl_fonction /) . Bloc ,
 Bloc -> 'Debut' . Inst . 'Fin' ,
 Decl_const -> 'const' . 'ident#1' . '=' . Entier#2 . ';' . [ ident#1' . '=' . Entier#2 . ';' ] ,
 Decl_var -> ( 'var' . 'ident#1' . '=' . Entier#2 . ';' ) . [ ident#1' . '=' . Entier#2 . ';' ] ,

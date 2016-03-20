@@ -1,0 +1,5 @@
+Program somme
+var toto = 5 ;
+Debut
+toto = 2 ;
+Fin

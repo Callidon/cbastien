@@ -1,6 +1,7 @@
 #include "structures.hpp"
 #include "table_symboles.hpp"
 #include <fstream>
+#include <vector>
 #include <string>
 
 #ifndef SCANNER_HPP
@@ -34,6 +35,8 @@ typedef struct {
 typedef struct {
   std::fstream *file;
   token_gpl_t *token;
+  std::vector<std::string> *idents;
+  bool identNext;
 } scanner_gpl_t;
 
 /*
