@@ -122,6 +122,7 @@ void printNode(Node *node, int prof, table_symboles_t &table_symboles) {
     Atom *atom = static_cast<Atom *>(node);
     cout << "> code : " << atom->code << " | char : '"
          << table_symboles[atom->code] << "' | action : " << atom->action
+		 << " | type : " << atom->AType
          << endl;
   }
 }

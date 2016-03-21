@@ -1,7 +1,8 @@
-Prgm -> 'Program' . 'ident' . (/ Decl_const /) . (/ Decl_var /) . (/ Decl_fonction /) . Bloc ,
-Bloc -> 'Debut' . Inst . 'Fin' ,
-Decl_const -> 'const' . 'ident#1' . '=' . Entier#2 . ';' . [ ident#1' . '=' . Entier#2 . ';' ] ,
+Prgm -> 'Program' . 'a' . Bloc . '.' ,
+Bloc -> 'Debut' . 'Fin' , ;
+Entier -> [ '0' + '1' + '2' + '3' + '4' + '5' + '6' + '7' + '8' + '9' ] , ;
 Decl_var -> ( 'var' . 'ident#1' . '=' . Entier#2 . ';' ) . [ ident#1' . '=' . Entier#2 . ';' ] ,
+
 Inst -> ( Assign + Ope + If ) . [ Inst ] ,
 Assign -> 'ident' . '=' . ( 'ident' + Entier ) . ';' ,
 Ope -> ( 'ident' . '=' . ( 'ident' + Entier ) . Ope_math . ( 'ident' + Entier ) . ';' ) + ( 'ident' . '=' . ( 'ident' + Entier ) . Ope_incr . ';' ) ,
