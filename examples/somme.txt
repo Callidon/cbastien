@@ -1,1 +1,7 @@
-Program a Debut Fin .
+Program somme
+var Toto ;
+var Momo ;
+Debut
+Toto := 5 ;
+Momo := Toto ;
+Fin .

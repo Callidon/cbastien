@@ -47,8 +47,6 @@ int main(int argc, char* argv[]) {
 			//on scan le premier token avant d'analyser
 			scan(scanner, table);
 			cout << "analyse de grammar.txt : " << analyse_go(go[0], go, pile_node, scanner, table) << endl;
-			printForest(go, table);
-
 
 			// IMPORTANT : le premier symbole de la GPL est forcément à la case 18 de go
 			// test de l'analyseur de GPL

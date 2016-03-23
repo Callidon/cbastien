@@ -129,7 +129,7 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
     // on met à jour le scanner
     scanner->idents->push_back(token);
     scanner->identNext = false;
-} else if ((token == "var") || (token == "const")) {
+} else if ((token == "var") || (token == "const") || (token == "Program")) {
     // si le token déclare un identificateur à venir
     scanner->token->type = SYMB;
     scanner->token->code = table_get(table, token);
