@@ -10,7 +10,7 @@ using namespace std;
 void execute(PcodeStack & pile_pcode) {
 	int co = 0;
 	int spx = 0;
-	ExecStack pile_x;
+	ExecStack pile_x(pile_pcode.size(), 0);
 	while(pile_pcode[co] != STOP) {
 		interprete(pile_pcode, pile_x, co, spx);
 	}
@@ -19,7 +19,7 @@ void execute(PcodeStack & pile_pcode) {
 /*
  * Méthode interprétant la prochaine instruction en Pcode dans une pile d'instructions
  */
-void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx) {
+void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int &co, int &spx) {
 	auto operateur = [&](function<int(int,int)> op) {
 		pile_x[spx - 1] = op(pile_x[spx - 1], pile_x[spx]);
 		spx--;
@@ -154,13 +154,16 @@ void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx) {
 			co++;
 		} break;
 		case STOP : {
-			// TODO
+			// Jamais interpreté
 		} break;
 		case INDA : {
 			// TODO
 		} break;
 		case INDV : {
 			// TODO
+		} break;
+		default : {
+			cerr << "Erreur : instruction non reconnue" << endl;
 		} break;
 	}
 }

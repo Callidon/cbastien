@@ -67,10 +67,10 @@ int main(int argc, char* argv[]) {
 
 			pcode_filename.assign(argv[2]);
 			// déserialization de la pile de pcode
-			// deserialize_stack(pcode, pcode_filename);
+			deserialize_stack(pcode, pcode_filename);
 
 			// exécution de la pile de pcode
-			// execute(pcode);
+			execute(pcode);
 		} else {
 			cerr << "Erreur : option non reconnue" << endl << "Essayez ./cbastien -h pour afficher l'aide" << endl;
 			return 0;

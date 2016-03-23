@@ -109,6 +109,7 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
   while (!scanner->file->eof()) {
     current = scanner->file->get();
     if ((current == ' ') || (current == '\n')) {
+		scanner_consume_blanks(scanner);
       break;
     }
     token += current;
@@ -153,6 +154,20 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
  * Avance le scanner jusqu'au prochain token en passant les blancs et \n
  */
 void scanner_consume_blanks(scanner_t *scanner) {
+  char current, next = scanner->file->peek();
+  while (!scanner->file->eof()) {
+    if ((next != ' ') && next != '\n') {
+      break;
+    }
+    current = scanner->file->get();
+    next = scanner->file->peek();
+  }
+}
+
+/*
+ * Avance le scanner jusqu'au prochain token en passant les blancs et \n
+ */
+void scanner_consume_blanks(scanner_gpl_t *scanner) {
   char current, next = scanner->file->peek();
   while (!scanner->file->eof()) {
     if ((next != ' ') && next != '\n') {

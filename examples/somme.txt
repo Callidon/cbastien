@@ -2,6 +2,6 @@ Program somme
 var Toto ;
 var Momo ;
 Debut
-Toto := 5 ;
-Momo := Toto ;
+Momo := 5 ;
+Toto := 5 + Momo * 2 ;
 Fin .

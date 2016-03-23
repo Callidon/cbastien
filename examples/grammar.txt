@@ -2,17 +2,13 @@ Prgm -> ( 'Program' . 'ident' ) . (/ Decl_var /) . Bloc . '.' ,
 Bloc -> 'Debut' . (/ Inst /) . 'Fin' ,
 Decl_var -> ( 'var' . 'ident#1' . ';' ) . [ Decl_var ] ,
 Inst -> Assign . [ Inst ] ,
-Assign -> 'ident' . ':=' . ( 'ident' + Entier ) . ';' ,
-Entier -> [ '0' + '1' + '2' + '3' + '4' + '5' + '6' + '7' + '8' + '9' ] , ;
-
-
-Ope -> ( 'ident' . ':=' . ( 'ident' + Entier ) . Ope_math . ( 'ident' + Entier ) . ';' ) + ( 'ident' . ':=' . ( 'ident' + Entier ) . Ope_incr . ';' ) ,
+Assign -> 'ident' . ':=' . ( 'ident' + Entier ) . [ Ope_math . ( 'ident' + Entier ) ] . ';' ,
 Ope_math -> '+' + '-' + '*' + '/' ,
-Ope_incr -> '++' + '--' ,
+Entier -> '0' + '1' + '2' + '3' + '4' + '5' + '6' + '7' + '8' + '9' , ;
+
 Ope_rel -> '==' + '<' + '<=' + '>' + '>=' + '!=' ,
 If -> 'if' . Bool . 'then' . Inst . Else ,
 Else -> (/ 'else' . Inst /) ,
-Entier -> [ '0' + '1' + '2' + '3' + '4' + '5' + '6' + '7' + '8' + '9' ] ,
 Bool -> Terme_bool . [ 'ou' . Terme_bool ] ,
 Terme_bool -> Facteur_bool . [ 'et' . Facteur_bool ] ,
 Facteur_bool -> Primaire_bool + ( 'non'  . Primaire_bool ) ,

@@ -15,6 +15,6 @@ void execute(PcodeStack & pile_pcode);
 /*
  * Méthode interprétant la prochaine instruction en Pcode dans une pile d'instructions
  */
-void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int co, int spx);
+void interprete(PcodeStack & pile_pcode, ExecStack & pile_x, int &co, int &spx);
 
 #endif

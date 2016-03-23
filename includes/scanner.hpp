@@ -76,6 +76,11 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t & table);
 void scanner_consume_blanks(scanner_t *scanner);
 
 /*
+ * Avance le scanner jusqu'au prochain token en passant les blancs et \n
+ */
+void scanner_consume_blanks(scanner_gpl_t *scanner);
+
+/*
  * Imprime un token dans la sortie standard
  */
 void print_token(token_t *token, table_symboles_t &table);
