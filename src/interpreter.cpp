@@ -11,9 +11,9 @@ using namespace std;
 /*
  * Méthode exécutant une série d'instructions en Pcode
  */
-void execute(PcodeStack & pile_pcode) {
+void execute(PcodeStack & pile_pcode, int nb_vars) {
 	int co = 0;
-	int spx = 0;
+	int spx = nb_vars - 1;
 	ExecStack pile_x(pile_pcode.size(), 0);
 	while(pile_pcode[co] != STOP) {
 		interprete(pile_pcode, pile_x, co, spx);

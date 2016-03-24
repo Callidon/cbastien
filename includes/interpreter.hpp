@@ -14,7 +14,7 @@ typedef std::vector<int> ExecStack;
 /*
  * Méthode exécutant une série d'instructions en Pcode
  */
-void execute(PcodeStack & pile_pcode);
+void execute(PcodeStack & pile_pcode, int nb_vars);
 
 /*
  * Méthode interprétant la prochaine instruction en Pcode dans une pile d'instructions

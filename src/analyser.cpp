@@ -117,7 +117,6 @@ bool analyse_go(Node *node, Go &go, stack<Node *> &pile, scanner_t *scanner,
         case Terminal: {
           if (atom->code == scanner->token->code) {
             if (atom->action != 0) {
-				cout << "action " << atom->action << " on token " << scanner->token->chaine << endl;
 				gpl_action(adresses, pile_pcode, pile, scanner->token->chaine, atom->action);
             }
             scan_gpl(scanner, table);
@@ -127,7 +126,6 @@ bool analyse_go(Node *node, Go &go, stack<Node *> &pile, scanner_t *scanner,
         case NonTerminal: {
           if (analyse_gpl(go[atom->code], go, pile, table, scanner, adresses, pile_pcode)) {
             if (atom->action != 0) {
-				cout << "action " << atom->action << " on token " << scanner->token->chaine << endl;
               gpl_action(adresses, pile_pcode, pile, scanner->token->chaine, atom->action);
             }
             correct = true;

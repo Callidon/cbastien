@@ -13,11 +13,11 @@
 /*
  * Sérialize une pile de Pcode au format string et la stocke dans un fichier
  */
-void serialize_stack(PcodeStack & stack, std::string filename);
+void serialize_stack(PcodeStack & stack, int nb_vars, std::string filename);
 
 /*
  * Désérialize une pile de Pcode contenue dans un fichier
  */
-void deserialize_stack(PcodeStack & stack, std::string filename);
+void deserialize_stack(PcodeStack & stack, int &nb_vars, std::string filename);
 
 #endif

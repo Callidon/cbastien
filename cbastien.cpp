@@ -45,17 +45,23 @@ int main(int argc, char* argv[]) {
 			init_scanner(grammar_filename, scanner);
 			init_scanner_gpl(prog_filename, scanner_gpl);
 
-			// Test de l'analyseur de GO
+			// Analyse de la GPL
 			//on scan le premier token avant d'analyser
 			scan(scanner, table);
-			cout << "analyse de grammar.txt : " << analyse_go(go[0], go, pile_node, scanner, table) << endl;
+			if(! analyse_go(go[0], go, pile_node, scanner, table)) {
+				cerr << "Erreur : la grammaire " << grammar_filename << " fournie en argument est incorrecte" << endl;
+			}
 
 			// IMPORTANT : le premier symbole de la GPL est forcément à la case 18 de go
-			// test de l'analyseur de GPL
+			// Analyse du programme avec la GPL
 			scan_gpl(scanner_gpl, table);
-			cout << "analyse de main.txt : " << analyse_gpl(go[18], go, pile_actions, table, scanner_gpl, adresses, pile_pcode) << endl;
+			if(! analyse_gpl(go[18], go, pile_actions, table, scanner_gpl, adresses, pile_pcode)) {
+				cerr << "Erreur : le programme " << prog_filename << " fournie en argument est incorrecte" << endl;
+			}
 
-			serialize_stack(pile_pcode, "examples/test.txt");
+			serialize_stack(pile_pcode, adresses.size(), "examples/test.txt");
+
+			cout << "Le programme " << prog_filename << " a été compilé avec succès !" << endl;
 
 			close_scanner(scanner);
 			close_scanner_gpl(scanner_gpl);
@@ -63,6 +69,7 @@ int main(int argc, char* argv[]) {
 		} else if (strcmp(argv[1], "-x") == 0) {
 			string pcode_filename;
 			PcodeStack pcode;
+			int nb_vars = 0;
 
 			if(argc != 3) {
 				cerr << "Erreur : argument manquant" << endl << "Usage : ./cbastien -x <fichier-de-pcode>" << endl;
@@ -71,10 +78,10 @@ int main(int argc, char* argv[]) {
 
 			pcode_filename.assign(argv[2]);
 			// déserialization de la pile de pcode
-			deserialize_stack(pcode, pcode_filename);
+			deserialize_stack(pcode, nb_vars, pcode_filename);
 
 			// exécution de la pile de pcode
-			execute(pcode);
+			execute(pcode, nb_vars);
 		} else {
 			cerr << "Erreur : option non reconnue" << endl << "Essayez ./cbastien -h pour afficher l'aide" << endl;
 			return 0;
