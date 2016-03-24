@@ -1,11 +1,12 @@
 Prgm -> ( 'Program' . 'ident' ) . (/ Decl_var /) . Bloc . '.' ,
-Bloc -> 'Debut' . (/ Inst /) . 'Fin' ,
+Bloc -> 'Debut' . (/ Inst /) . 'Fin#14' ,
 Decl_var -> ( 'var' . 'ident#1' . ';' ) . [ Decl_var ] ,
-Inst -> Assign . [ Inst ] ,
-Assign -> 'ident' . ':=' . ( 'ident' + Entier ) . [ Ope_math . ( 'ident' + Entier ) ] . ';' ,
-Ope_math -> '+' + '-' + '*' + '/' ,
-Entier -> '0' + '1' + '2' + '3' + '4' + '5' + '6' + '7' + '8' + '9' , ;
+Inst -> ( Assign + Inst_IO ) . [ Inst ] ,
+Assign -> 'ident#2' . ':=' . ( 'ident#3' + 'entier#4' ) . [ Ope_math . ( 'ident#10' + 'entier#11' ) ] . ';#5' ,
+Ope_math -> '+#6' + '-#7' + '*#8' + '/#9' ,
+Inst_IO -> ( 'write#12' + 'writeln#13' ) . ( 'ident#10' + 'entier#11' ) . ';' , ;
 
+// work in progress
 Ope_rel -> '==' + '<' + '<=' + '>' + '>=' + '!=' ,
 If -> 'if' . Bool . 'then' . Inst . Else ,
 Else -> (/ 'else' . Inst /) ,

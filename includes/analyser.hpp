@@ -8,6 +8,7 @@
 #include "scanner.hpp"
 #include "structures.hpp"
 #include "table_symboles.hpp"
+#include "actions.hpp"
 #include <stack>
 
 /*
@@ -21,7 +22,7 @@ bool analyse_go(Node *node, Go &go, std::stack<Node *> &pile,
  * Fonction analysant une grammaire pour vérifier si elle est correcte par
  * rapport à la GPL
  */
-bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile,
-                 scanner_gpl_t *scanner, table_symboles_t &table);
+ bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile, table_symboles_t &table,
+                  scanner_gpl_t *scanner, adresses_table_t &adresses, PcodeStack &pile_pcode);
 
 #endif

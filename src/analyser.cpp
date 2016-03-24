@@ -77,38 +77,38 @@ bool analyse_go(Node *node, Go &go, stack<Node *> &pile, scanner_t *scanner,
  * Fonction analysant une grammaire pour vérifier si elle est correcte par
  * rapport à la GPL
  */
-bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile,
-                 scanner_gpl_t *scanner, table_symboles_t &table) {
+ bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile, table_symboles_t &table,
+                  scanner_gpl_t *scanner, adresses_table_t &adresses, PcodeStack &pile_pcode) {
   bool correct = false;
   switch (node->classname) {
     // cas d'un noeud Conc
     case CONC: {
       Conc *conc = static_cast<Conc *>(node);
-      if (analyse_gpl(conc->right, go, pile, scanner, table)) {
-        correct = analyse_gpl(conc->left, go, pile, scanner, table);
+      if (analyse_gpl(conc->right, go, pile, table, scanner, adresses, pile_pcode)) {
+        correct = analyse_gpl(conc->left, go, pile, table, scanner, adresses, pile_pcode);
       }
     } break;
     // cas d'un noeud Union
     case UNION: {
       Union *punion = static_cast<Union *>(node);
-      if (analyse_gpl(punion->right, go, pile, scanner, table)) {
+      if (analyse_gpl(punion->right, go, pile, table, scanner, adresses, pile_pcode)) {
         correct = true;
       } else {
-        correct = analyse_gpl(punion->left, go, pile, scanner, table);
+        correct = analyse_gpl(punion->left, go, pile, table, scanner, adresses, pile_pcode);
       }
     } break;
     // cas d'un noeud Star
     case STAR: {
       Star *star = static_cast<Star *>(node);
       correct = true;
-      while (analyse_gpl(star->Star_e, go, pile, scanner, table)) {
+      while (analyse_gpl(star->Star_e, go, pile, table, scanner, adresses, pile_pcode)) {
       }
     } break;
     // cas d'un noeud Un
     case UN: {
       Un *un = static_cast<Un *>(node);
       correct = true;
-      analyse_gpl(un->Un_e, go, pile, scanner, table);
+      analyse_gpl(un->Un_e, go, pile, table, scanner, adresses, pile_pcode);
     } break;
     // cas d'un noeud Atom
     case ATOM: {
@@ -118,23 +118,17 @@ bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile,
           if (atom->code == scanner->token->code) {
             if (atom->action != 0) {
 				cout << "action " << atom->action << " on token " << scanner->token->chaine << endl;
-              // TODO mettre gpl_action ici
-              // go_action(table, go, pile, scanner->token->chaine,
-              // atom->action,
-              // scanner->token->action, Terminal);
+				gpl_action(adresses, pile_pcode, pile, scanner->token->chaine, atom->action);
             }
             scan_gpl(scanner, table);
             correct = true;
           }
         } break;
         case NonTerminal: {
-          if (analyse_gpl(go[atom->code], go, pile, scanner, table)) {
+          if (analyse_gpl(go[atom->code], go, pile, table, scanner, adresses, pile_pcode)) {
             if (atom->action != 0) {
 				cout << "action " << atom->action << " on token " << scanner->token->chaine << endl;
-              // TODO mettre gpl_action ici
-              // go_action(table, go, pile, scanner->token->chaine,
-              // atom->action,
-              // scanner->token->action, NonTerminal);
+              gpl_action(adresses, pile_pcode, pile, scanner->token->chaine, atom->action);
             }
             correct = true;
           }

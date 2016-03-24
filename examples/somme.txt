@@ -1,7 +1,8 @@
 Program somme
-var Toto ;
 var Momo ;
+var Toto ;
 Debut
-Momo := 5 ;
-Toto := 5 + Momo * 2 ;
+Toto := 5 ;
+Momo := Toto + 3 ;
+writeln Momo ;
 Fin .

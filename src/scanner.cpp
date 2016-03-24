@@ -145,7 +145,7 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
     if ((ascii_first >= 49) && (ascii_first <= 57)) {
       // cas d'un entier
       scanner->token->type = ENT;
-      scanner->token->code = table_get(table, token);
+      scanner->token->code = table_get(table, "entier");
     } else {
       // cas d'un symbole (==, <, <=, etc)
       scanner->token->type = SYMB;
