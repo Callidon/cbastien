@@ -1,3 +1,7 @@
+/*
+ * Générateurs de noeuds composants des arbres de grammaire
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #include "generators.hpp"
 #include <iostream>
 

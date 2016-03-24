@@ -1,4 +1,9 @@
+/*
+ * Analyseurs des grammaires Go et GPL
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #include "analyser.hpp"
+#include "actions.hpp"
 #include <iostream>
 using namespace std;
 
@@ -112,6 +117,7 @@ bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile,
         case Terminal: {
           if (atom->code == scanner->token->code) {
             if (atom->action != 0) {
+				cout << "action " << atom->action << " on token " << scanner->token->chaine << endl;
               // TODO mettre gpl_action ici
               // go_action(table, go, pile, scanner->token->chaine,
               // atom->action,
@@ -124,6 +130,7 @@ bool analyse_gpl(Node *node, Go &go, std::stack<int> &pile,
         case NonTerminal: {
           if (analyse_gpl(go[atom->code], go, pile, scanner, table)) {
             if (atom->action != 0) {
+				cout << "action " << atom->action << " on token " << scanner->token->chaine << endl;
               // TODO mettre gpl_action ici
               // go_action(table, go, pile, scanner->token->chaine,
               // atom->action,

@@ -1,3 +1,7 @@
+/*
+ * Analyseurs des grammaires Go et GPL
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #ifndef ANALYSER_HPP
 #define ANALYSER_HPP
 

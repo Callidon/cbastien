@@ -1,3 +1,7 @@
+/*
+ * Fonctions de scan des différentes fichiers
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #include "structures.hpp"
 #include "table_symboles.hpp"
 #include <fstream>
@@ -21,7 +25,7 @@ typedef struct {
 // Structure représentant un token utilisable par la GPL
 typedef struct {
   TokenGPLType type;
-  std::string value;
+  std::string chaine;
   int code;
 } token_gpl_t;
 

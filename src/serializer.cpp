@@ -1,7 +1,14 @@
+/*
+ * Fonctions de sérializations et de désérialization des piles de Pcode
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #include "serializer.hpp"
 
 using namespace std;
 
+/*
+ * Sérialize une pile de pcode au format string et la stocke dans un fichier
+ */
 void serialize_stack(PcodeStack & stack, std::string filename) {
 	fstream file (filename, fstream::out);
 	for(auto &it : stack) {
@@ -10,6 +17,9 @@ void serialize_stack(PcodeStack & stack, std::string filename) {
 	}
 }
 
+/*
+ * Désérialize une pile de pcode contenue dans un fichier
+ */
 void deserialize_stack(PcodeStack & stack, std::string filename) {
 	fstream file (filename, fstream::in);
 	string token;

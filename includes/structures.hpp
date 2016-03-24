@@ -1,3 +1,7 @@
+/*
+ * Structures de base constituant des arbres de grammaire
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #ifndef STRUCTURES_HPP
 #define STRUCTURES_HPP
 

@@ -1,3 +1,7 @@
+/*
+ * Fonctions de scan des différentes fichiers
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #include "scanner.hpp"
 #include <stdlib.h>
 #include <algorithm>
@@ -82,7 +86,7 @@ void init_scanner_gpl(string filename, scanner_gpl_t *scanner) {
   scanner->file = new fstream;
   scanner->file->open(filename, fstream::in);
   scanner->token = new token_gpl_t;
-  scanner->token->value = "";
+  scanner->token->chaine = "";
   scanner->token->type = NONE;
   scanner->idents = new vector<string>;
   scanner->identNext = false;
@@ -114,7 +118,7 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
     }
     token += current;
   }
-  scanner->token->value = token;
+  scanner->token->chaine = token;
 
   bool inIndentTable = find(scanner->idents->begin(), scanner->idents->end(),
                             token) != scanner->idents->end();

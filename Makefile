@@ -1,8 +1,8 @@
-# Projet de compilation
+# Projet de compilation - M1 ALMA
 # auteurs : Pierre Gaultier & Thomas Minier
 CXX = g++
 CXXFLAGS = -I./includes/ --std=c++11
-SOURCES = src/generators.cpp src/scanner.cpp src/table_symboles.cpp src/analyser.cpp src/serializer.cpp src/interpreter.cpp
+SOURCES = src/generators.cpp src/scanner.cpp src/table_symboles.cpp src/analyser.cpp src/actions.cpp src/serializer.cpp src/interpreter.cpp
 .PHONY : clean
 
 cbastien: $(SOURCES:.cpp=.o)

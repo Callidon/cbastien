@@ -1,3 +1,7 @@
+/*
+ * Fonctions d'interprétations du Pseudo code
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #include "interpreter.hpp"
 #include <string>
 #include <iostream>

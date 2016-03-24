@@ -1,3 +1,7 @@
+/*
+ * Fonctions et strcutures liées à la table des symboles
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #ifndef TABLE_SYMBOLES_HPP
 #define TABLE_SYMBOLES_HPP
 
@@ -31,19 +35,5 @@ int table_get(table_symboles_t &table, std::string symbole);
  * n'existe pas dans la table
  */
 int table_search_code(table_symboles_t &table, std::string symbole);
-
-/*
- * Fonction effectuant une action lié à la grammaire Go
- */
-void go_action(table_symboles_t &table, Go &go, std::stack<Node *> &pile,
-               std::string symbole, int atom_action, int symbole_action,
-               ATOMTYPE catype);
-
-/*
- * Fonction effectuant une action lié à la grammaire GPL
- */
-void gpl_action(table_symboles_t &table, Go &go, std::stack<Node *> &pile,
-			    std::string symbole, int atom_action, int symbole_action,
-			    ATOMTYPE catype);
 
 #endif

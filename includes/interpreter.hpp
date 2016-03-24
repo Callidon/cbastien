@@ -1,3 +1,7 @@
+/*
+ * Fonctions d'interprétations du Pseudo code
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #ifndef INTERPRETER_HPP
 #define INTERPRETER_HPP
 

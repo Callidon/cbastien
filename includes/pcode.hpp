@@ -1,3 +1,7 @@
+/*
+ * Constantes pour les différentes instructions en Pseudo code
+ * Auteurs : Pierre Gaultier et Thomas Minier
+ */
 #ifndef PCODE_HPP
 #define PCODE_HPP
 
