@@ -12,7 +12,7 @@ const int NB_SYMBOLES = 18;
 /*
  * Fonction initialisant une table de symboles
  */
-void table_init(table_symboles_t &table) {
+void table_init(table_symboles_t& table) {
   string symboles[NB_SYMBOLES] = {"S",  "N", "E",  "T",  "F",      ";",
                                   "->", "+", ".",  ",",  "(",      ")",
                                   "[",  "]", "(/", "/)", "IDNTER", "ELTER"};
@@ -25,9 +25,9 @@ void table_init(table_symboles_t &table) {
  * Fonction renvoyant le code associé à un symbole parmi ceux spécifiques à la
  * Go, et renvoyant -1 en cas de symbole non trouvé
  */
-int table_go_get(table_symboles_t &table, string symbole) {
+int table_go_get(table_symboles_t& table, string symbole) {
   int code = -1, cpt = 0;
-  for (auto &it : table) {
+  for (auto& it : table) {
     // si on a dépassé les symbole de la Go, on renvoie -1
     if (cpt >= NB_SYMBOLES) {
       return -1;
@@ -45,9 +45,9 @@ int table_go_get(table_symboles_t &table, string symbole) {
  * Fonction renvoyant le code associé à un symbole, et renvoyant -1 en cas de
  * symbole non trouvé
  */
-int table_get(table_symboles_t &table, string symbole) {
+int table_get(table_symboles_t& table, string symbole) {
   int code = -1;
-  for (auto &it : table) {
+  for (auto& it : table) {
     if (it.second == symbole) {
       return it.first;
     }
@@ -60,9 +60,9 @@ int table_get(table_symboles_t &table, string symbole) {
  * Fonction renvoyant le code associé à un symbole, et ajoutant le symbole s'il
  * n'existe pas dans la table
  */
-int table_search_code(table_symboles_t &table, string symbole) {
+int table_search_code(table_symboles_t& table, string symbole) {
   int code;
-  for (auto &it : table) {
+  for (auto& it : table) {
     if (it.second == symbole) {
       return it.first;
     }

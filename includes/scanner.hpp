@@ -2,11 +2,11 @@
  * Fonctions de scan des différentes fichiers
  * Auteurs : Pierre Gaultier et Thomas Minier
  */
+#include <fstream>
+#include <string>
+#include <vector>
 #include "structures.hpp"
 #include "table_symboles.hpp"
-#include <fstream>
-#include <vector>
-#include <string>
 
 #ifndef SCANNER_HPP
 #define SCANNER_HPP
@@ -72,7 +72,7 @@ void close_scanner_gpl(scanner_gpl_t *scanner);
 /*
  * Fait avancer le scanner de gpl d'un token
  */
-void scan_gpl(scanner_gpl_t *scanner, table_symboles_t & table);
+void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table);
 
 /*
  * Avance le scanner jusqu'au prochain token en passant les blancs et \n

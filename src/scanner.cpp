@@ -12,7 +12,7 @@ using namespace std;
 /*
  * Initialise un scanner et ouvre le fichier dont le nom est passé en paramètre
  */
-void init_scanner(string filename, scanner_t *scanner) {
+void init_scanner(string filename, scanner_t* scanner) {
   scanner->file = new fstream;
   scanner->file->open(filename, fstream::in);
   scanner->token = new token_t;
@@ -24,17 +24,18 @@ void init_scanner(string filename, scanner_t *scanner) {
 /*
  * Ferme un scanner sur un fichier
  */
-void close_scanner(scanner_t *scanner) {
+void close_scanner(scanner_t* scanner) {
   if (scanner->file->is_open()) {
     scanner->file->close();
   }
-  delete scanner->token, scanner;
+  delete scanner->token;
+  delete scanner;
 }
 
 /*
  * Fait avancer le scanner d'un token
  */
-void scan(scanner_t *scanner, table_symboles_t &table_symboles) {
+void scan(scanner_t* scanner, table_symboles_t& table_symboles) {
   int code = -1;
   bool reading_action = false;
   char current;
@@ -82,7 +83,7 @@ void scan(scanner_t *scanner, table_symboles_t &table_symboles) {
  * Initialise un scanner de gpl et ouvre le fichier dont le nom est passé en
  * paramètre
  */
-void init_scanner_gpl(string filename, scanner_gpl_t *scanner) {
+void init_scanner_gpl(string filename, scanner_gpl_t* scanner) {
   scanner->file = new fstream;
   scanner->file->open(filename, fstream::in);
   scanner->token = new token_gpl_t;
@@ -95,17 +96,19 @@ void init_scanner_gpl(string filename, scanner_gpl_t *scanner) {
 /*
  * Ferme un scanner de gpl sur un fichier
  */
-void close_scanner_gpl(scanner_gpl_t *scanner) {
+void close_scanner_gpl(scanner_gpl_t* scanner) {
   if (scanner->file->is_open()) {
     scanner->file->close();
   }
-  delete scanner->token, scanner->idents, scanner;
+  delete scanner->token;
+  delete scanner->idents;
+  delete scanner;
 }
 
 /*
  * Fait avancer le scanner de gpl d'un token
  */
-void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
+void scan_gpl(scanner_gpl_t* scanner, table_symboles_t& table) {
   char current;
   string token = "";
 
@@ -113,7 +116,7 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
   while (!scanner->file->eof()) {
     current = scanner->file->get();
     if ((current == ' ') || (current == '\n')) {
-		scanner_consume_blanks(scanner);
+      scanner_consume_blanks(scanner);
       break;
     }
     token += current;
@@ -134,7 +137,7 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
     // on met à jour le scanner
     scanner->idents->push_back(token);
     scanner->identNext = false;
-} else if ((token == "var") || (token == "const") || (token == "Program")) {
+  } else if ((token == "var") || (token == "const") || (token == "Program")) {
     // si le token déclare un identificateur à venir
     scanner->token->type = SYMB;
     scanner->token->code = table_get(table, token);
@@ -157,13 +160,13 @@ void scan_gpl(scanner_gpl_t *scanner, table_symboles_t &table) {
 /*
  * Avance le scanner jusqu'au prochain token en passant les blancs et \n
  */
-void scanner_consume_blanks(scanner_t *scanner) {
-  char current, next = scanner->file->peek();
+void scanner_consume_blanks(scanner_t* scanner) {
+  char next = scanner->file->peek();
   while (!scanner->file->eof()) {
     if ((next != ' ') && next != '\n') {
       break;
     }
-    current = scanner->file->get();
+    scanner->file->get();
     next = scanner->file->peek();
   }
 }
@@ -171,13 +174,13 @@ void scanner_consume_blanks(scanner_t *scanner) {
 /*
  * Avance le scanner jusqu'au prochain token en passant les blancs et \n
  */
-void scanner_consume_blanks(scanner_gpl_t *scanner) {
-  char current, next = scanner->file->peek();
+void scanner_consume_blanks(scanner_gpl_t* scanner) {
+  char next = scanner->file->peek();
   while (!scanner->file->eof()) {
     if ((next != ' ') && next != '\n') {
       break;
     }
-    current = scanner->file->get();
+    scanner->file->get();
     next = scanner->file->peek();
   }
 }
@@ -185,7 +188,7 @@ void scanner_consume_blanks(scanner_gpl_t *scanner) {
 /*
  * Imprime un token dans la sortie standard
  */
-void print_token(token_t *token, table_symboles_t &table) {
+void print_token(token_t* token, table_symboles_t& table) {
   cout << "chaine : " << token->chaine << " | code : " << token->code
        << " | symbole : " << table[token->code] << " | AType : " << token->AType
        << " | action : " << token->action << endl;

@@ -5,10 +5,10 @@
 #ifndef TABLE_SYMBOLES_HPP
 #define TABLE_SYMBOLES_HPP
 
-#include "structures.hpp"
 #include <map>
 #include <stack>
 #include <string>
+#include "structures.hpp"
 
 // Type représentant une table de symbole
 typedef std::map<int, std::string> table_symboles_t;

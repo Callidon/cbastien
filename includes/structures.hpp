@@ -20,14 +20,20 @@ typedef struct _Node { Operation classname; } Node;
 typedef struct _Conc : public Node {
   Node *left;
   Node *right;
-  ~_Conc() { delete left, right; }
+  ~_Conc() {
+    delete left;
+    delete right;
+  }
 } Conc;
 
 // Noeud représentant une union
 typedef struct _Union : public Node {
   Node *left;
   Node *right;
-  ~_Union() { delete left, right; }
+  ~_Union() {
+    delete left;
+    delete right;
+  }
 } Union;
 
 // Noeud représentant une opération [x]

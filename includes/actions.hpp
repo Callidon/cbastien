@@ -5,11 +5,11 @@
 #ifndef ACTIONS_HPP
 #define ACTIONS_HPP
 
-#include "structures.hpp"
-#include "table_symboles.hpp"
-#include "interpreter.hpp"
 #include <map>
 #include <stack>
+#include "interpreter.hpp"
+#include "structures.hpp"
+#include "table_symboles.hpp"
 
 typedef std::map<std::string, int> adresses_table_t;
 
@@ -23,7 +23,7 @@ void go_action(table_symboles_t &table, Go &go, std::stack<Node *> &pile,
 /*
  * Fonction effectuant une action liée à la grammaire GPL
  */
-void gpl_action(adresses_table_t &adresses, PcodeStack &pile_pcode, std::stack<int> &pile,
-			    std::string symbole, int action);
+void gpl_action(adresses_table_t &adresses, PcodeStack &pile_pcode,
+                std::stack<int> &pile, std::string symbole, int action);
 
 #endif

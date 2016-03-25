@@ -8,13 +8,3 @@ Momo := 6 ;
 Lolo := Toto + Momo ;
 writeln Lolo ;
 Fin .
-
-
-Program somme
-var Momo ;
-var Toto ;
-Debut
-Toto := 5 ;
-Momo := Toto + 3 ;
-writeln Momo ;
-Fin .
