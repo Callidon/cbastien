@@ -50,13 +50,15 @@ int main(int argc, char* argv[]) {
 			scan(scanner, table);
 			if(! analyse_go(go[0], go, pile_node, scanner, table)) {
 				cerr << "Erreur : la grammaire " << grammar_filename << " fournie en argument est incorrecte" << endl;
+				return 0;
 			}
 
 			// IMPORTANT : le premier symbole de la GPL est forcément à la case 18 de go
 			// Analyse du programme avec la GPL
 			scan_gpl(scanner_gpl, table);
 			if(! analyse_gpl(go[18], go, pile_actions, table, scanner_gpl, adresses, pile_pcode)) {
-				cerr << "Erreur : le programme " << prog_filename << " fournie en argument est incorrecte" << endl;
+				cerr << "Erreur : le programme " << prog_filename << " fourni en argument est incorrect" << endl;
+				return 0;
 			}
 
 			serialize_stack(pile_pcode, adresses.size(), "examples/test.txt");

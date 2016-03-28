@@ -145,6 +145,21 @@ void gpl_action(adresses_table_t& adresses, PcodeStack& pile_pcode,
     case 14: {
       pile_pcode.push_back(STOP);
     } break;
+	// empiler l'opérateur RD
+	case 15 : {
+		pile.push(RD);
+	} break;
+	//empiler l'opérateur RDLN
+	case 16 : {
+		pile.push(RDLN);
+	} break;
+	// chargement de l'adresse d'une variable puis dépiler une opération
+	case 17 : {
+		pile_pcode.push_back(LDA);
+        pile_pcode.push_back(adresses[symbole]);
+		pile_pcode.push_back(pile.top());
+        pile.pop();
+	} break;
     default: {
       cerr << "Erreur : action GPL (" << action << ") non supportée " << endl;
     } break;

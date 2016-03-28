@@ -1,10 +1,10 @@
 Program somme
-var Momo ;
-var Toto ;
-var Lolo ;
+var Xa ;
+var Xb ;
+var Res ;
 Debut
-Toto := 4 ;
-Momo := 6 ;
-Lolo := Toto + Momo ;
-writeln Lolo ;
+readln Xa ;
+Xb := 6 ;
+Res := Xb + Xa ;
+writeln Res ;
 Fin .

@@ -91,6 +91,7 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
     case RD: {
       string input;
       spx++;
+	  cout << "Input : ";
       cin >> input;
       pile_x[spx] = atoi(input.c_str());
       co++;
@@ -98,6 +99,7 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
     case RDLN: {
       string input;
       spx++;
+	  cout << "Input : ";
       cin >> input;
       cout << endl;
       pile_x[spx] = atoi(input.c_str());
