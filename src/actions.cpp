@@ -160,6 +160,18 @@ void gpl_action(adresses_table_t& adresses, PcodeStack& pile_pcode,
 		pile_pcode.push_back(pile.top());
         pile.pop();
 	} break;
+	// allocation mémoire pour une variable et chargement de l'adresse de cette variable
+	case 18 : {
+		if (adresses.size() == 0) {
+          adresses[symbole] = 0;
+        } else {
+          // on affecte à la prochaine adresse disponible
+          int adr = adresses.size();
+          adresses[symbole] = adr;
+        }
+		pile_pcode.push_back(LDA);
+        pile_pcode.push_back(adresses[symbole]);
+	} break;
     default: {
       cerr << "Erreur : action GPL (" << action << ") non supportée " << endl;
     } break;

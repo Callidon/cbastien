@@ -1,10 +1,9 @@
 Program somme
 var Xa ;
-var Xb ;
 var Res ;
+const Xb := 6 ;
 Debut
 readln Xa ;
-Xb := 6 ;
 Res := Xb + Xa ;
 writeln Res ;
 Fin .

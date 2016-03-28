@@ -1,7 +1,7 @@
 Prgm -> ( 'Program' . 'ident' ) . (/ Decl_var /) . (/ Decl_const /) . Bloc . '.' ,
 Bloc -> 'Debut' . (/ Inst /) . 'Fin#14' ,
 Decl_var -> ( 'var' . 'ident#1' . ';' ) . [ Decl_var ] ,
-Decl_const -> 'const' . 'ident' . ':=' . ( 'ident' + 'entier' ) . ';' . [ Decl_const ] ,
+Decl_const -> 'const' . 'ident#18' . ':=' . ( 'ident#3' + 'entier#4' ) . ';#5' . [ Decl_const ] ,
 Inst -> ( Assign + Inst_RD + Inst_WRT ) . [ Inst ] ,
 Assign -> 'ident#2' . ':=' . ( 'ident#3' + 'entier#4' ) . [ Ope_math . ( 'ident#10' + 'entier#11' ) ] . ';#5' ,
 Ope_math -> '+#6' + '-#7' + '*#8' + '/#9' ,
