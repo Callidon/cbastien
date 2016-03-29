@@ -5,10 +5,8 @@ const Xb := 6 ;
 const Xc := 7 ;
 Debut
 readln Xa ;
-writeln Xa ;
-if Xa == 1 then
+while Xa != 0 do
 writeln Xb ;
-else
-writeln Xc ;
-endif
+readln Xa ;
+endwhile
 Fin .

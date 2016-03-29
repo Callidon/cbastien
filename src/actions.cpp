@@ -145,95 +145,120 @@ void gpl_action(adresses_table_t& adresses, PcodeStack& pile_pcode,
     case 14: {
       pile_pcode.push_back(STOP);
     } break;
-	// empiler l'opérateur RD
-	case 15 : {
-		pile.push(RD);
-	} break;
-	//empiler l'opérateur RDLN
-	case 16 : {
-		pile.push(RDLN);
-	} break;
-	// chargement de l'adresse d'une variable puis dépiler une opération
-	case 17 : {
-		pile_pcode.push_back(LDA);
-        pile_pcode.push_back(adresses[symbole]);
-		pile_pcode.push_back(pile.top());
-        pile.pop();
-	} break;
-	// allocation mémoire pour une variable et chargement de l'adresse de cette variable
-	case 18 : {
-		if (adresses.size() == 0) {
-          adresses[symbole] = 0;
-        } else {
-          // on affecte à la prochaine adresse disponible
-          int adr = adresses.size();
-          adresses[symbole] = adr;
-        }
-		pile_pcode.push_back(LDA);
-        pile_pcode.push_back(adresses[symbole]);
-	} break;
-	// empiler l'opérateur OU
-	case 19 : {
-		pile.push(OR);
-	} break;
-	// dépiler un opérateur puis l'empiler
-	case 20 : {
-		pile_pcode.push_back(pile.top());
-		pile.pop();
-	} break;
-	// empiler l'opérateur ET
-	case 21 : {
-		pile.push(AND);
-	} break;
-	// empiler l'opérateur NOT
-	case 22 : {
-		pile.push(NOT);
-	} break;
-	// empiler l'opérateur ==
-	case 23 : {
-		pile.push(EQ);
-	} break;
-	// empiler l'opérateur <
-	case 24 : {
-		pile.push(INF);
-	} break;
-	// empiler l'opérateur <=
-	case 25 : {
-		pile.push(INFE);
-	} break;
-	// empiler l'opérateur >
-	case 26 : {
-		pile.push(SUP);
-	} break;
-	// empiler l'opérateur >=
-	case 27 : {
-		pile.push(SUPE);
-	} break;
-	// empiler l'opérateur !=
-	case 28 : {
-		pile.push(DIFF);
-	} break;
-	// on prépare le saut si la condition du if est fausse
-	case 29 : {
-		int co = pile_pcode.size() - 1;
-		pile_pcode.push_back(JIF);
-		pile.push(co + 2);
-		pile_pcode.push_back(-1);
-	} break;
-	// on pérapre le saut pour le else
-	case 30 : {
-		int co = pile_pcode.size() - 1;
-		pile_pcode.push_back(JMP);
-		pile_pcode[pile.top()] = co + 3;
-		pile.pop();
-		pile_pcode.push_back(-1);
-		pile.push(co + 2);
-	} break;
-	// on dépile et ajoute la dernière adresse de saut
-	case 31 : {
-		pile_pcode[pile.top()] = pile_pcode.size();
-		pile.pop();
-	} break;
+    // empiler l'opérateur RD
+    case 15: {
+      pile.push(RD);
+    } break;
+    // empiler l'opérateur RDLN
+    case 16: {
+      pile.push(RDLN);
+    } break;
+    // chargement de l'adresse d'une variable puis dépiler une opération
+    case 17: {
+      pile_pcode.push_back(LDA);
+      pile_pcode.push_back(adresses[symbole]);
+      pile_pcode.push_back(pile.top());
+      pile.pop();
+    } break;
+    // allocation mémoire pour une variable et chargement de l'adresse de cette
+    // variable
+    case 18: {
+      if (adresses.size() == 0) {
+        adresses[symbole] = 0;
+      } else {
+        // on affecte à la prochaine adresse disponible
+        int adr = adresses.size();
+        adresses[symbole] = adr;
+      }
+      pile_pcode.push_back(LDA);
+      pile_pcode.push_back(adresses[symbole]);
+    } break;
+    // empiler l'opérateur OU
+    case 19: {
+      pile.push(OR);
+    } break;
+    // dépiler un opérateur puis l'empiler
+    case 20: {
+      pile_pcode.push_back(pile.top());
+      pile.pop();
+    } break;
+    // empiler l'opérateur ET
+    case 21: {
+      pile.push(AND);
+    } break;
+    // empiler l'opérateur NOT
+    case 22: {
+      pile.push(NOT);
+    } break;
+    // empiler l'opérateur ==
+    case 23: {
+      pile.push(EQ);
+    } break;
+    // empiler l'opérateur <
+    case 24: {
+      pile.push(INF);
+    } break;
+    // empiler l'opérateur <=
+    case 25: {
+      pile.push(INFE);
+    } break;
+    // empiler l'opérateur >
+    case 26: {
+      pile.push(SUP);
+    } break;
+    // empiler l'opérateur >=
+    case 27: {
+      pile.push(SUPE);
+    } break;
+    // empiler l'opérateur !=
+    case 28: {
+      pile.push(DIFF);
+    } break;
+    // on prépare le saut si la condition du if est fausse
+    case 29: {
+      int co = pile_pcode.size() - 1;
+      pile_pcode.push_back(JIF);
+      pile.push(co + 2);
+      // on remplit avec une valeur par défaut la case qui contiendra plus tard l'adresse de saut
+      pile_pcode.push_back(-1);
+    } break;
+    // on prépare le saut pour le else
+    case 30: {
+      int co = pile_pcode.size() - 1;
+      pile_pcode.push_back(JMP);
+      pile_pcode[pile.top()] = co + 3;
+      pile.pop();
+      pile.push(co + 2);
+      // on remplit avec une valeur par défaut la case qui contiendra plus tard l'adresse de saut
+      pile_pcode.push_back(-1);
+    } break;
+    // on dépile et ajoute la dernière adresse de saut
+    case 31: {
+      pile_pcode[pile.top()] = pile_pcode.size();
+      pile.pop();
+    } break;
+    // on prépare le saut pour le while
+    case 32: {
+      int co = pile_pcode.size() - 1;
+      pile_pcode.push_back(JIF);
+      pile.push(co + 2);
+	  // on remplit avec une valeur par défaut la case qui contiendra plus tard l'adresse de saut
+      pile_pcode.push_back(-1);
+    } break;
+    // on termine le saut pour un while
+    case 33: {
+      // on complète le saut JIF du while
+      pile_pcode[pile.top()] = pile_pcode.size() + 2;
+      pile.pop();
+      // on retourne au test du while
+      pile_pcode.push_back(JMP);
+      pile_pcode.push_back(pile.top());
+      pile.pop();
+    } break;
+    // on prépare le retour dans le while
+    case 34: {
+      pile.push(pile_pcode.size());
+    } break;
     default: {
       cerr << "Erreur : action GPL (" << action << ") non supportée " << endl;
     } break;

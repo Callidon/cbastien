@@ -15,7 +15,6 @@ void execute(PcodeStack& pile_pcode, int nb_vars) {
   int co = 0;
   int spx = nb_vars - 1;
   ExecStack pile_x(pile_pcode.size(), 0);
-
   while (pile_pcode[co] != STOP) {
     interprete(pile_pcode, pile_x, co, spx);
   }
@@ -62,10 +61,10 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
       spx--;
     } break;
     case JSR: {
-      // TODO
+      // Non implémenté car non nécessaire pour cette itération du projet
     } break;
     case RSR: {
-      // TODO
+      // Non implémenté car non nécessaire pour cette itération du projet
     } break;
 
     // Opérateurs relationnels
@@ -92,7 +91,7 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
     case RD: {
       string input;
       spx++;
-	  cout << "Input : ";
+      cout << "Input : ";
       cin >> input;
       pile_x[spx] = atoi(input.c_str());
       co++;
@@ -100,7 +99,7 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
     case RDLN: {
       string input;
       spx++;
-	  cout << "Input : ";
+      cout << "Input : ";
       cin >> input;
       cout << endl;
       pile_x[spx] = atoi(input.c_str());
@@ -165,11 +164,16 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
       // Jamais interpreté
     } break;
     case INDA: {
-      // TODO
+      // Non implémenté car non nécessaire pour cette itération du projet
     } break;
     case INDV: {
-      // TODO
+      // Non implémenté car non nécessaire pour cette itération du projet
     } break;
-    default: { cerr << "Erreur : instruction (" << pile_pcode[co] << ") non reconnue" << endl; exit(0); } break;
+    // cas par défaut
+    default: {
+      cerr << "Erreur : instruction (" << pile_pcode[co] << ") non reconnue"
+           << endl;
+      exit(0);
+    } break;
   }
 }
