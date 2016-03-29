@@ -2,17 +2,15 @@ Prgm -> ( 'Program' . 'ident' ) . (/ Decl_var /) . (/ Decl_const /) . Bloc . '.'
 Bloc -> 'Debut' . (/ Inst /) . 'Fin#14' ,
 Decl_var -> ( 'var' . 'ident#1' . ';' ) . [ Decl_var ] ,
 Decl_const -> 'const' . 'ident#18' . ':=' . ( 'ident#3' + 'entier#4' ) . ';#5' . [ Decl_const ] ,
-Inst -> ( Assign + Inst_RD + Inst_WRT ) . [ Inst ] ,
+Inst -> ( Assign + If + Inst_RD + Inst_WRT ) . [ Inst ] ,
 Assign -> 'ident#2' . ':=' . ( 'ident#3' + 'entier#4' ) . [ Ope_math . ( 'ident#10' + 'entier#11' ) ] . ';#5' ,
-Ope_math -> '+#6' + '-#7' + '*#8' + '/#9' ,
 Inst_RD -> ( 'read#15' + 'readln#16' ) . 'ident#17' . ';#5' ,
-Inst_WRT -> ( 'write#12' + 'writeln#13' ) . ( 'ident#10' + 'entier#11' ) . ';' , ;
-
-// work in progress
-Ope_rel -> '==' + '<' + '<=' + '>' + '>=' + '!=' ,
-If -> 'if' . Bool . 'then' . Inst . Else ,
-Else -> (/ 'else' . Inst /) ,
-Bool -> Terme_bool . [ 'ou' . Terme_bool ] ,
-Terme_bool -> Facteur_bool . [ 'et' . Facteur_bool ] ,
-Facteur_bool -> Primaire_bool + ( 'non'  . Primaire_bool ) ,
-Primaire_bool -> Exp . Ope_rel . Exp , ;
+Inst_WRT -> ( 'write#12' + 'writeln#13' ) . ( 'ident#10' + 'entier#11' ) . ';' ,
+If -> 'if' . Bool#29 . 'then' . Inst . Else#31 . 'endif' ,
+Else -> (/ 'else#30' . Inst /) ,
+Bool -> Terme_bool . [ 'ou#19' . Terme_bool#20 ] ,
+Terme_bool -> Facteur_bool . [ 'et#21' . Facteur_bool#20 ] ,
+Facteur_bool -> Primaire_bool + ( 'non#22'  . Primaire_bool#20 ) ,
+Primaire_bool -> ( 'ident#3' + 'entier#4' ) . Ope_rel . ( 'ident#10' + 'entier#11' ) ,
+Ope_rel -> '==#23' + '<#24' + '<=#25' + '>#26' + '>=#27' + '!=#28' ,
+Ope_math -> '+#6' + '-#7' + '*#8' + '/#9' , ;

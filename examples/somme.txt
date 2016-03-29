@@ -2,8 +2,13 @@ Program somme
 var Xa ;
 var Res ;
 const Xb := 6 ;
+const Xc := 7 ;
 Debut
 readln Xa ;
-Res := Xb + Xa ;
-writeln Res ;
+writeln Xa ;
+if Xa == 1 then
+writeln Xb ;
+else
+writeln Xc ;
+endif
 Fin .

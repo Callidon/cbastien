@@ -172,6 +172,68 @@ void gpl_action(adresses_table_t& adresses, PcodeStack& pile_pcode,
 		pile_pcode.push_back(LDA);
         pile_pcode.push_back(adresses[symbole]);
 	} break;
+	// empiler l'opérateur OU
+	case 19 : {
+		pile.push(OR);
+	} break;
+	// dépiler un opérateur puis l'empiler
+	case 20 : {
+		pile_pcode.push_back(pile.top());
+		pile.pop();
+	} break;
+	// empiler l'opérateur ET
+	case 21 : {
+		pile.push(AND);
+	} break;
+	// empiler l'opérateur NOT
+	case 22 : {
+		pile.push(NOT);
+	} break;
+	// empiler l'opérateur ==
+	case 23 : {
+		pile.push(EQ);
+	} break;
+	// empiler l'opérateur <
+	case 24 : {
+		pile.push(INF);
+	} break;
+	// empiler l'opérateur <=
+	case 25 : {
+		pile.push(INFE);
+	} break;
+	// empiler l'opérateur >
+	case 26 : {
+		pile.push(SUP);
+	} break;
+	// empiler l'opérateur >=
+	case 27 : {
+		pile.push(SUPE);
+	} break;
+	// empiler l'opérateur !=
+	case 28 : {
+		pile.push(DIFF);
+	} break;
+	// on prépare le saut si la condition du if est fausse
+	case 29 : {
+		int co = pile_pcode.size() - 1;
+		pile_pcode.push_back(JIF);
+		pile.push(co + 2);
+		pile_pcode.push_back(-1);
+	} break;
+	// on pérapre le saut pour le else
+	case 30 : {
+		int co = pile_pcode.size() - 1;
+		pile_pcode.push_back(JMP);
+		pile_pcode[pile.top()] = co + 3;
+		pile.pop();
+		pile_pcode.push_back(-1);
+		pile.push(co + 2);
+	} break;
+	// on dépile et ajoute la dernière adresse de saut
+	case 31 : {
+		pile_pcode[pile.top()] = pile_pcode.size();
+		pile.pop();
+	} break;
     default: {
       cerr << "Erreur : action GPL (" << action << ") non supportée " << endl;
     } break;

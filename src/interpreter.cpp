@@ -15,6 +15,7 @@ void execute(PcodeStack& pile_pcode, int nb_vars) {
   int co = 0;
   int spx = nb_vars - 1;
   ExecStack pile_x(pile_pcode.size(), 0);
+
   while (pile_pcode[co] != STOP) {
     interprete(pile_pcode, pile_x, co, spx);
   }
@@ -169,6 +170,6 @@ void interprete(PcodeStack& pile_pcode, ExecStack& pile_x, int& co, int& spx) {
     case INDV: {
       // TODO
     } break;
-    default: { cerr << "Erreur : instruction non reconnue" << endl; } break;
+    default: { cerr << "Erreur : instruction (" << pile_pcode[co] << ") non reconnue" << endl; exit(0); } break;
   }
 }

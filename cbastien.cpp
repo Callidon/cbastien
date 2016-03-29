@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 				return 0;
 			}
 
-			serialize_stack(pile_pcode, adresses.size(), "examples/test.txt");
+			serialize_stack(pile_pcode, adresses.size(), "examples/pcode.txt");
 
 			cout << "Le programme " << prog_filename << " a été compilé avec succès !" << endl;
 
