@@ -1,0 +1,14 @@
+Program successif
+var I ;
+var S ;
+var N ;
+Debut
+read N ;
+S := 0 ;
+I := 0 ;
+while I <= N do
+S := S + I ;
+I := I + 1 ;
+endwhile
+writeln S ;
+Fin .

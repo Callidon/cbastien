@@ -1,12 +1,10 @@
 Program somme
-var Xa ;
-var Res ;
-const Xb := 6 ;
-const Xc := 7 ;
+var I ;
+var S ;
+var N ;
 Debut
-readln Xa ;
-while Xa != 0 do
-writeln Xb ;
-readln Xa ;
-endwhile
+read N ;
+read S ;
+I := N + S ;
+writeln I ;
 Fin .

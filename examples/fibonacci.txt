@@ -1,0 +1,19 @@
+Program fibonacci
+var Value ;
+var Prev ;
+var PrevPrev ;
+var Total ;
+var I ;
+Debut
+read Value ;
+I := 0 ;
+Prev := 0 ;
+PrevPrev := 1 ;
+while I <= Value do
+Total := Prev + PrevPrev ;
+PrevPrev := Prev ;
+Prev := Total ;
+I := I + 1 ;
+endwhile
+writeln Total ;
+Fin .
