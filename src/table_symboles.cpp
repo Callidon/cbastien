@@ -3,7 +3,6 @@
  * Auteurs : Pierre Gaultier et Thomas Minier
  */
 #include "table_symboles.hpp"
-#include <iostream>
 
 using namespace std;
 
@@ -13,8 +12,8 @@ const int NB_SYMBOLES = 18;
  * Fonction initialisant une table de symboles
  */
 void table_init(table_symboles_t& table) {
-  string symboles[NB_SYMBOLES] = {"S",  "N", "E",  "T",  "F",      ";",
-                                  "->", "+", ".",  ",",  "(",      ")",
+  string symboles[NB_SYMBOLES] = {"S",  "N", "E",  "T",  "F", ";",
+                                  "->", "+", ".",  ",",  "(", ")",
                                   "[",  "]", "(/", "/)", "IDNTER", "ELTER"};
   for (int i = 0; i < NB_SYMBOLES; i++) {
     table[i] = symboles[i];

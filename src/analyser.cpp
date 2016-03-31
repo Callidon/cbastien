@@ -3,7 +3,6 @@
  * Auteurs : Pierre Gaultier et Thomas Minier
  */
 #include "analyser.hpp"
-#include <iostream>
 #include "actions.hpp"
 using namespace std;
 
