@@ -1,0 +1,12 @@
+Program cond
+var I ;
+const X := 1 ;
+const Y := 2 ;
+Debut
+read I ;
+if I <= 10 then
+writeln X ;
+else
+writeln Y ;
+endif
+Fin .

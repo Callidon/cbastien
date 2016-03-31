@@ -9,7 +9,7 @@ read Value ;
 I := 0 ;
 Prev := 0 ;
 PrevPrev := 1 ;
-while I <= Value do
+while I < Value do
 Total := Prev + PrevPrev ;
 PrevPrev := Prev ;
 Prev := Total ;

@@ -50,6 +50,7 @@ Programmes d'exemples
 ==============
 
 Les programmes suivants sont fournis avec le projet, stockés dans le dossier *examples/* :
+* **cond.txt** qui démontre l'utilisation d'une condtionnelle et de constantes
 * **somme.txt** qui effectue puis affiche la somme de deux entiers demandés en input
 * **successif.txt** qui calcule puis affiche la somme des entiers consécutifs de 0 jusqu'à *N*, ce dernier étant demandé en input
 * **fibonacci.txt** qui calcule puis affiche la suite de fibonnaci de *N*, ce dernier étant demandé en input
