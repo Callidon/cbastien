@@ -1,5 +1,5 @@
 /*
- * Fonctions et strcutures liées à la table des symboles
+ * Fonctions et structures liées à la table des symboles
  * Auteurs : Pierre Gaultier et Thomas Minier
  */
 #ifndef TABLE_SYMBOLES_HPP

@@ -84,7 +84,7 @@ void gpl_action(adresses_table_t& adresses, PcodeStack& pile_pcode,
         adresses[symbole] = adr;
       }
     } break;
-    // chagrement de l'adresse d'une variable
+    // chargement de l'adresse d'une variable
     case 2: {
       pile_pcode.push_back(LDA);
       pile_pcode.push_back(adresses[symbole]);

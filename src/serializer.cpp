@@ -11,8 +11,10 @@ using namespace std;
  */
 void serialize_stack(PcodeStack& stack, int nb_vars, std::string filename) {
   fstream file(filename, fstream::out);
+  // on ajoute le nombre de variables allouées en mémoire au début du fichier
   file << to_string(nb_vars);
   file << ' ';
+  // on ajoute tous les éléments de la pile de pcode dans le fichier
   for (auto& it : stack) {
     file << to_string(it);
     file << ' ';
